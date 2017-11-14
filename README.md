@@ -30,4 +30,4 @@ npm start
 
 ## ©️ License
 
-MIT
+[MIT](https://github.com/LushX/LushX-FE/blob/master/LICENSE)
