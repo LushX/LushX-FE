@@ -5,7 +5,7 @@
         <router-link to="/" exact>
           <img class="logo" src="~public/logo-48.png" alt="logo">
         </router-link>
-        <router-link to="/top">最热</router-link>
+        <router-link to="/test">最热</router-link>
         <router-link to="/new">最新</router-link>
         <router-link to="/show">搜索</router-link>
         <!-- <router-link to="/ask">Ask</router-link>

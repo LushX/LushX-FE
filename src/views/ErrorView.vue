@@ -38,6 +38,7 @@ export default {
   .msg
     list-style-type none
     padding 0
+    line-height 3em
   a
     color #59BBA5
 </style>
