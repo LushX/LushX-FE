@@ -5,11 +5,14 @@
         <router-link to="/" exact>
           <img class="logo" src="~public/logo-48.png" alt="logo">
         </router-link>
-        <router-link to="/top">Top</router-link>
-        <router-link to="/new">New</router-link>
-        <router-link to="/show">Show</router-link>
-        <router-link to="/ask">Ask</router-link>
-        <router-link to="/job">Jobs</router-link>
+        <router-link to="/top">最热</router-link>
+        <router-link to="/new">最新</router-link>
+        <router-link to="/show">搜索</router-link>
+        <!-- <router-link to="/ask">Ask</router-link>
+        <router-link to="/job">Jobs</router-link> -->
+        <a class="login" rel="noopener">
+          登录
+        </a>
       </nav>
     </header>
     <transition name="fade" mode="out-in">
@@ -33,7 +36,7 @@ a
   text-decoration none
 
 .header
-  background-color #ff6600
+  background-color #59BBA5
   position fixed
   z-index 999
   height 55px
@@ -61,11 +64,12 @@ a
       font-weight 400
     &:nth-child(6)
       margin-right 0
-  .github
+  .login
     color #fff
     font-size .9em
     margin 0
     float right
+    cursor pointer
 
 .logo
   width 24px

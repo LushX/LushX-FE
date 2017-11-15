@@ -47,7 +47,7 @@ export default {
   position relative
   line-height 20px
   .score
-    color #ff6600
+    color #59BBA5
     font-size 1.1em
     font-weight 700
     position absolute
@@ -63,5 +63,5 @@ export default {
       color #828282
       text-decoration underline
       &:hover
-        color #ff6600
+        color #59BBA5
 </style>

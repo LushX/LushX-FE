@@ -57,7 +57,7 @@ export default {
   .text
     overflow-wrap break-word
     a:hover
-      color #ff6600
+      color #59BBA5
     pre
       white-space pre-wrap
   .toggle
