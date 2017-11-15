@@ -1,9 +1,15 @@
 #! /bin/bash
 
+echo 'Starting pull code from GitHub...'
 git reset --hard origin/master
 git clean -f
 git pull
+
+echo 'Starting install dependencies...'
 yarn
+
+echo 'Starting build project...'
 yarn run build
-pm2 info 0
+
+echo 'reloading website...'
 pm2 reload lushx
