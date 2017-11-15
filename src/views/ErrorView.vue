@@ -22,23 +22,24 @@ export default {
   title () {
     return this.code
       ? this.code
-      : 'Error'
+      : '出错啦'
   }
 }
 </script>
 
 <style lang="stylus">
 .error-view
+  margin 30px auto
+  padding 20px 30px 20px 80px
   background-color #fff
   box-sizing border-box
-  padding 2em 3em
   h1
     margin 0
     font-size 3em
   .msg
     list-style-type none
     padding 0
-    line-height 3em
+    line-height 2em
   a
     color #59BBA5
 </style>

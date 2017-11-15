@@ -5,14 +5,10 @@
         <router-link to="/" exact>
           <img class="logo" src="~public/logo-48.png" alt="logo">
         </router-link>
-        <router-link to="/test">最热</router-link>
-        <router-link to="/new">最新</router-link>
-        <router-link to="/show">搜索</router-link>
-        <!-- <router-link to="/ask">Ask</router-link>
-        <router-link to="/job">Jobs</router-link> -->
-        <a class="login" rel="noopener">
-          登录
-        </a>
+        <router-link to="/movie/top">最热</router-link>
+        <router-link to="/movie/new">最新</router-link>
+        <router-link to="/search">搜索</router-link>
+        <router-link to="/login" class="login">登录</router-link>
       </nav>
     </header>
     <transition name="fade" mode="out-in">
