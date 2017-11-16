@@ -1,9 +1,7 @@
 <template>
-  <transition>
-    <svg class="spinner" :class="{ show: show }" v-show="show" width="44px" height="44px" viewBox="0 0 44 44">
-      <circle class="path" fill="none" stroke-width="4" stroke-linecap="round" cx="22" cy="22" r="20"></circle>
-    </svg>
-  </transition>
+  <svg class="spinner" :class="{ show: show }" v-show="show" width="44px" height="44px" viewBox="0 0 44 44">
+    <circle class="path" fill="none" stroke-width="4" stroke-linecap="round" cx="22" cy="22" r="20"></circle>
+  </svg>
 </template>
 
 <script>
@@ -19,7 +17,6 @@ $offset = 126
 $duration = 1.4s
 
 .spinner
-  transition opacity .15s ease
   animation rotator $duration linear infinite
   animation-play-state paused
   &.show
@@ -36,7 +33,7 @@ $duration = 1.4s
     transform scale(0.5) rotate(270deg)
 
 .spinner .path
-  stroke #59BBA5
+  stroke #efc14e
   stroke-dasharray $offset
   stroke-dashoffset 0
   transform-origin center

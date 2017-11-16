@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const createListView = id => () => import('../views/CreateListView').then(m => m.default(id))
+const createListView = type => () => import('../views/CreateListView').then(m => m.default(type))
+const createAuthView = type => () => import('../views/CreateAuthView').then(m => m.default(type))
 const ItemView = () => import('../views/ItemView.vue')
 const ErrorView = () => import('../views/ErrorView.vue')
 
@@ -13,6 +14,7 @@ export function createRouter () {
     fallback: false,
     scrollBehavior: () => ({ y: 0 }),
     routes: [
+      { path: '/auth/:type', component: createAuthView('auth') },      
       { path: '/movie/top', component: createListView('top') },
       { path: '/movie/top/:id(\\d+)', component: ItemView },
       { path: '/error/:code', component: ErrorView },

@@ -9,8 +9,18 @@ function getTitle (vm) {
 
 const serverTitleMixin = {
   created () {
-    const title = getTitle(this)
+    let title = getTitle(this)
     if (title) {
+      switch (title) {
+        case 'Top':
+          title = '最热'
+          break
+        case 'Auth':
+          title = '鉴权'
+          break
+        default:
+          break
+      }
       this.$ssrContext.title = `LushX | ${title}`
     }
   }
@@ -18,8 +28,18 @@ const serverTitleMixin = {
 
 const clientTitleMixin = {
   mounted () {
-    const title = getTitle(this)
+    let title = getTitle(this)
     if (title) {
+      switch (title) {
+        case 'Top':
+          title = '最热'
+          break
+        case 'Auth':
+          title = '鉴权'
+          break
+        default:
+          break
+      }
       document.title = `LushX | ${title}`
     }
   }

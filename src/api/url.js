@@ -1,3 +1,5 @@
 export default {
-  TOP_MOVIE: '/movie/top'
+  TOP_MOVIE: '/movie/top',
+  LOGIN: '/login',
+  REGISTER: '/register'
 }

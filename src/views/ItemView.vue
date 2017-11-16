@@ -21,7 +21,7 @@ export default {
 
   computed: {
     item () {
-      return this.$store.state.movie.top[(this.$route.params.id - 1)]
+      return this.$store.state.list[(this.$route.params.id - 1)]
     }
   },
 

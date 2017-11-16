@@ -8,9 +8,8 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
-      movie: {
-        top: []
-      }
+      list: [],
+      user: {}
     },
     actions,
     mutations

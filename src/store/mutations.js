@@ -4,7 +4,12 @@ export default {
   SET_ACTIVE_TYPE: (state, { type }) => {
     state.activeType = type
   },
-  SET_LIST_TEST: (state, { type, data }) => {
-    state.movie.top = data.top
+
+  SET_LIST: (state, { data }) => {
+    state.list = data.data.top
+  },
+
+  SET_USER: (state, { data }) => {
+    state.user = data.data
   }
 }

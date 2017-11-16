@@ -8,7 +8,7 @@
         <router-link to="/movie/top">最热</router-link>
         <router-link to="/movie/new">最新</router-link>
         <router-link to="/search">搜索</router-link>
-        <router-link to="/login" class="login">登录</router-link>
+        <a class="login" @click="userHandle">{{ auth ? '个人中心' : '登录' }}</a>
       </nav>
     </header>
     <transition name="fade" mode="out-in">
@@ -16,6 +16,29 @@
     </transition>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'app',
+
+  computed: {
+    auth () {
+      return this.$store.state.user.Authorization
+    }
+  },
+
+  methods: {
+    userHandle () {
+      if(this.auth) {
+        let userId = this.$store.state.user.info.userId
+        this.$router.push({ path: `/user/${userId}` })
+      } else {
+        this.$router.push({ path: '/auth/login' })
+      }
+    }
+  }
+}
+</script>
 
 <style lang="stylus">
 body

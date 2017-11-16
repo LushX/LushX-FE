@@ -36,7 +36,7 @@ export default {
     return {
       transition: 'slide-right',
       displayedPage: 1,
-      displayedItems: this.$store.state.movie.top
+      displayedItems: this.$store.state.list
     }
   },
 
