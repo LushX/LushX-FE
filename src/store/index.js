@@ -9,7 +9,8 @@ export function createStore () {
   return new Vuex.Store({
     state: {
       list: [],
-      user: {}
+      user: {},
+      currentType: 'movie'
     },
     actions,
     mutations

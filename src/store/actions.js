@@ -13,5 +13,9 @@ export default {
 
   SET_USER: ({ commit, dispatch }, { data }) => {
     commit('SET_USER', { data })
+  },
+
+  SWITCH_TYPE: ({ commit, dispatch }, { type }) => {
+    commit('SWITCH_TYPE', { type })
   }
 }
