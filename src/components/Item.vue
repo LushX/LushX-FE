@@ -1,18 +1,25 @@
 <template>
   <li class="list-item">
-    <span class="score">{{ item.score }}</span>
+    <template v-if="currentType === 'article'">
+      <span class="score"><i class="fa fa-book" aria-hidden="true"></i></span>      
+    </template>
+    <template v-else>
+      <span class="score">{{ item.score }}</span>
+    </template>
     <span class="title">
-      <router-link :to="'/movie/top/' + item.id">{{ item.title }}</router-link>
+      <router-link :to="`/${ currentType }/top/${ item.id }`">{{ item.title }}</router-link>
     </span>
     <br>
     <template v-if="currentType === 'article'">
-      <span class="label">{{ item.time }}</span>      
+      <span class="label">{{ item.time | timeLabel }}</span>      
     </template>
     <span class="label" v-for="(label, idx) in item.type" :key="idx">{{ label }}</span>
   </li>
 </template>
 
 <script>
+import { timeLabel } from '../util/filters'
+
 export default {
   name: 'list-item',
 
