@@ -6,9 +6,13 @@ export default function createListView (type) {
   return {
     name: `${ type }-type-view`,
 
-    asyncData ({ store }) {
-      let currentType = store.state.currentType
-      return store.dispatch('REQ_TOP_DATA', { type, currentType })
+    asyncData ({ store, route }) {
+      const currentType = store.state.currentType
+      const model = {
+        page: route.params.page - 1,
+        size: store.state.itemsPerPage
+      }
+      return store.dispatch('REQ_TOP_DATA', { type, currentType, model })
     },
 
     title: camelize(type),

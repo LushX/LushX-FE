@@ -2,14 +2,16 @@ import * as ajax from '../api'
 import url from '../api/url'
 
 export default {
-  REQ_TOP_DATA: ({ commit, dispatch }, { type, currentType }) => {
+  REQ_TOP_DATA: ({ commit, dispatch }, { type, currentType, model }) => {
     commit('SET_ACTIVE_TYPE', { type })
+
     switch (currentType) {
       case 'movie': {
         return ajax.get({
             url: url.TOP_MOVIE
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_TOTAL_PAGE', { data })
           })
         break
       }
@@ -19,6 +21,7 @@ export default {
             url: url.TOP_ANIMATION
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_TOTAL_PAGE', { data })
           })
         break
       }
@@ -28,6 +31,7 @@ export default {
             url: url.TOP_CAM
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_TOTAL_PAGE', { data })
           })
         break
       }
@@ -37,15 +41,19 @@ export default {
             url: url.TOP_TV
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_TOTAL_PAGE', { data })
           })
         break
       }
 
       case 'article': {
         return ajax.get({
-            url: url.TOP_ARTICLE
+            url: url.TOP_ARTICLE,
+            data: model
           }).then(data => {
+            console.log(data)
             commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_TOTAL_PAGE', { data })
           })
         break
       }

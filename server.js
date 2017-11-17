@@ -98,7 +98,7 @@ function render (req, res) {
     }
     res.send(html)
     if (!isProd) {
-      console.log(`whole request: ${Date.now() - s}ms`)
+      console.log(`whole request: ${ Date.now() - s }ms`)
     }
   })
 }

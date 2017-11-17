@@ -18,11 +18,11 @@ export const post = obj => {
 
 // GET请求
 export const get = obj => {
-    return new Promise((resolve,reject) => {
-      axios.get(obj.url, obj.data).then(data => {
-        resolve(data.data)
-      }).catch(data => {
-        reject(data.data)
-      })
+  return new Promise((resolve,reject) => {
+    axios.get(obj.url, { params: obj.data }).then(data => {
+      resolve(data.data)
+    }).catch(data => {
+      reject(data.data)
     })
-  }
+  })
+}

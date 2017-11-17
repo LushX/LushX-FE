@@ -8,6 +8,8 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
+      totalPage: 1,
+      itemsPerPage: 5,
       list: [],
       user: {},
       currentType: 'movie'

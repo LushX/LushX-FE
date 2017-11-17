@@ -62,7 +62,7 @@ export default {
   methods: {
     switchType (type) {
       this.$store.dispatch('SWITCH_TYPE', { type })
-      this.$router.push({ path: `/${ this.currentType }/top` })
+      this.$router.push({ path: `/${ this.currentType }/top/1` })
     }
   },
 

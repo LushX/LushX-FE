@@ -16,8 +16,8 @@ export function createRouter () {
     scrollBehavior: () => ({ y: 0 }),
     routes: [
       { path: '/auth/:type', component: createAuthView('auth') },      
-      { path: '/:type/top', component: createListView('top') },
-      { path: '/:type/top/:id(\\d+)', component: ItemView },
+      { path: '/:type/top/:page(\\d+)', component: createListView('top') },
+      { path: '/:type/top/detail/:id(\\d+)', component: ItemView },
       { path: '/error/:code', component: ErrorView },
       { path: '/type', component: TypeView },      
       { path: '/', redirect: '/movie/top' }

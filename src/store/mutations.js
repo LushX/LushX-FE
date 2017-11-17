@@ -5,22 +5,26 @@ export default {
     state.activeType = type
   },
 
+  SET_TOTAL_PAGE: (state, { data }) => {
+    state.totalPage = Number(data.data.totalPages)
+  },
+
   SET_TOP_LIST: (state, { data, currentType }) => {
     switch (currentType) {
       case 'movie':
-        state.list = data.data.top
+        // state.list = data.data.top
         break
 
       case 'animation':
-        state.list = data.data.top
+        // state.list = data.data.top
         break
 
       case 'cam':
-        state.list = data.data.top
+        // state.list = data.data.top
         break
 
       case 'tv':
-        state.list = data.data.top
+        // state.list = data.data.top
         break
 
       case 'article':

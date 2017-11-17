@@ -1,10 +1,10 @@
 <template>
   <div class="list-view">
     <div class="news-list-nav">
-      <router-link v-if="page > 1" :to="'/' + type + '/' + (page - 1)">&lt; 上一页</router-link>
+      <router-link v-if="page > 1" :to="`/${ currentType }/${ type }/${ (page - 1) }`">&lt; 上一页</router-link> 
       <a v-else class="disabled">&lt; 上一页</a>
       <span>{{ page }}/{{ maxPage }}</span>
-      <router-link v-if="hasMore" :to="'/' + type + '/' + (page + 1)">下一页 &gt;</router-link>
+      <router-link v-if="hasMore" :to="`/${ currentType }/${ type }/${ (page + 1) }`">下一页 &gt;</router-link>
       <a v-else class="disabled">下一页 &gt;</a>
     </div>
     <transition :name="transition">
@@ -35,19 +35,18 @@ export default {
   data () {
     return {
       transition: 'slide-right',
-      displayedPage: 1,
+      displayedPage: Number(this.$route.params.page) || 1,
       displayedItems: this.$store.state.list
     }
   },
 
-  computed: {
+  computed: {      
     page () {
-      return 1
+       return Number(this.$route.params.page) || 1
     },
 
     maxPage () {
-      // const { itemsPerPage, lists } = this.$store.state
-      return 1
+      return this.$store.state.totalPage
     },
 
     hasMore () {
@@ -59,22 +58,36 @@ export default {
     }
   },
 
-  mounted () {
+  beforeMount () {
+    this.$bar.finish()    
     if (this.$root._isMounted) {
       this.loadItems(this.page)
     }
   },
 
   watch: {
-    page (to, from) {
+    page (to, from) {          
       this.loadItems(to, from)
     }
   },
 
   methods: {
     loadItems (to = this.page, from = -1) {
-      this.$bar.start()
-      this.$store.dispatch('REQ_TOP_DATA', { type: this.type, currentType: this.currentType })
+      const model = {
+        page: this.$route.params.page - 1,
+        size: this.$store.state.itemsPerPage
+      }
+      this.$store.dispatch('REQ_TOP_DATA', { type: this.type, currentType: this.currentType, model }).then(() => {
+        if (this.page < 0 || this.page > this.maxPage) {
+          this.$router.replace(`/${ currentType }/${ this.type }/1`)
+          return
+        }
+        this.transition = from === -1
+          ? null
+          : to > from ? 'slide-left' : 'slide-right'
+        this.displayedPage = to
+        this.displayedItems = this.$store.state.list
+      })
     }
   }
 }

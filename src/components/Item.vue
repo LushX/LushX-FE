@@ -7,7 +7,7 @@
       <span class="score">{{ item.score }}</span>
     </template>
     <span class="title">
-      <router-link :to="`/${ currentType }/top/${ item.id }`">{{ item.title }}</router-link>
+      <router-link :to="`/${ currentType }/top/detail/${ item.id }`">{{ item.title }}</router-link>
     </span>
     <br>
     <template v-if="currentType === 'article'">
