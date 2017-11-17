@@ -5,6 +5,9 @@
       <router-link :to="'/movie/top/' + item.id">{{ item.title }}</router-link>
     </span>
     <br>
+    <template v-if="currentType === 'article'">
+      <span class="label">{{ item.time }}</span>      
+    </template>
     <span class="label" v-for="(label, idx) in item.type" :key="idx">{{ label }}</span>
   </li>
 </template>
@@ -12,7 +15,14 @@
 <script>
 export default {
   name: 'list-item',
-  props: ['item']
+
+  props: ['item'],
+
+  computed: {
+    currentType () {
+      return this.$store.state.currentType
+    }
+  }
 }
 </script>
 

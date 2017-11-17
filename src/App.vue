@@ -36,7 +36,7 @@ export default {
     userHandle () {
       if(this.auth) {
         let userId = this.$store.state.user.info.userId
-        this.$router.push({ path: `/user/${userId}` })
+        this.$router.push({ path: `/user/${ userId }` })
       } else {
         this.$router.push({ path: '/auth/login' })
       }

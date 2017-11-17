@@ -44,12 +44,18 @@ export default {
     page () {
       return 1
     },
+
     maxPage () {
       // const { itemsPerPage, lists } = this.$store.state
       return 1
     },
+
     hasMore () {
       return this.page < this.maxPage
+    },
+
+    currentType () {
+      return this.$store.state.currentType
     }
   },
 
@@ -68,7 +74,7 @@ export default {
   methods: {
     loadItems (to = this.page, from = -1) {
       this.$bar.start()
-      this.$store.dispatch('REQ_LIST_DATA', { type: this.type })
+      this.$store.dispatch('REQ_TOP_DATA', { type: this.type, currentType: this.currentType })
     }
   }
 }

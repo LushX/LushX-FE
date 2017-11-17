@@ -5,8 +5,31 @@ export default {
     state.activeType = type
   },
 
-  SET_LIST: (state, { data }) => {
-    state.list = data.data.top
+  SET_TOP_LIST: (state, { data, currentType }) => {
+    switch (currentType) {
+      case 'movie':
+        state.list = data.data.top
+        break
+
+      case 'animation':
+        state.list = data.data.top
+        break
+
+      case 'cam':
+        state.list = data.data.top
+        break
+
+      case 'tv':
+        state.list = data.data.top
+        break
+
+      case 'article':
+        state.list = data.data.content
+        break
+
+      default:
+        break
+    }
   },
 
   SET_USER: (state, { data }) => {
@@ -14,6 +37,6 @@ export default {
   },
 
   SWITCH_TYPE: (state, { type }) => {
-    state.currentType = type    
+    state.currentType = type
   }
 }

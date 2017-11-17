@@ -26,7 +26,7 @@ export default context => {
         store,
         route: router.currentRoute
       }))).then(() => {
-        isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`)
+        isDev && console.log(`data pre-fetch: ${ Date.now() - s }ms`)
         context.state = store.state
         resolve(app)
       }).catch(reject)

@@ -21,7 +21,7 @@ const serverTitleMixin = {
         default:
           break
       }
-      this.$ssrContext.title = `LushX | ${title}`
+      this.$ssrContext.title = `LushX | ${ title }`
     }
   }
 }
@@ -40,7 +40,7 @@ const clientTitleMixin = {
         default:
           break
       }
-      document.title = `LushX | ${title}`
+      document.title = `LushX | ${ title }`
     }
   }
 }

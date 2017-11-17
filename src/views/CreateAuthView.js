@@ -4,7 +4,7 @@ const camelize = str => str.charAt(0).toUpperCase() + str.slice(1)
 
 export default function createListView (type) {
   return {
-    name: `${type}-type-view`,
+    name: `${ type }-type-view`,
 
     title: camelize(type),
 
