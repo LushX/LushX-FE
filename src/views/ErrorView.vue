@@ -42,4 +42,8 @@ export default {
     line-height 2em
   a
     color #59BBA5
+
+@media (max-width 600px)
+  .error-view
+    padding 20px 30px 20px 30px
 </style>

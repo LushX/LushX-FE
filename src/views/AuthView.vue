@@ -184,6 +184,7 @@ export default {
       margin-right .5em
     input
       border 0
+      border-radius 0
       border-bottom 1px solid rgba(0,0,0,.2)
       outline none
       line-height 2em
