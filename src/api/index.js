@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 axios.defaults.timeout = 1000000 // 响应时间
-axios.defaults.headers.post['Content-Type'] = 'application/json' // 通信格式
+axios.defaults.headers['Content-Type'] = 'application/json' // 通信格式
 axios.defaults.baseURL = 'http://139.224.135.245:8080/lushx' // 开发环境接口地址
 // axios.defaults.baseURL = '' // 生产环境接口地址
 
@@ -18,8 +18,20 @@ export const post = obj => {
 
 // GET请求
 export const get = obj => {
+  console.log(obj.authorization)
+  let headers = {}
+
+  if(obj.authorization) {
+    headers = {
+      headers: {
+        'Authorization': obj.authorization
+      }
+    }
+  }
+  console.log(headers)
+
   return new Promise((resolve,reject) => {
-    axios.get(obj.url, { params: obj.data }).then(data => {
+    axios.get(obj.url, { params: obj.data }, headers).then(data => {
       resolve(data.data)
     }).catch(data => {
       reject(data.data)

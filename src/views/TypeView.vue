@@ -1,9 +1,9 @@
 <template>
   <div class="type-view">
     <div class="type-view-header">
-      <a>
-        <h1>选择分类</h1>
-      </a>
+      <h1>
+        <a>选择分类</a>
+      </h1>
     </div>
     <div class="type-view-details">
       <ul class="type-list-wrapper">

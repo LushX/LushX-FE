@@ -62,8 +62,21 @@ export default {
     }
   },
 
-  SET_USER: ({ commit, dispatch }, { data }) => {
-    commit('SET_USER', { data })
+  SET_AUTHORIZATION: ({ commit, dispatch }, { data }) => {
+    commit('SET_AUTHORIZATION', { data })
+  },
+
+  SET_USERID: ({ commit, dispatch }, { data }) => {
+    commit('SET_USERID', { data })
+  },
+
+  REQ_USER_INFO: ({ commit, dispatch }, { authorization }) => {
+    return ajax.get({
+      url: url.USER_INFO,
+      authorization: authorization
+    }).then(data => {
+      console.log(data)
+    })
   },
 
   SWITCH_TYPE: ({ commit, dispatch }, { type }) => {

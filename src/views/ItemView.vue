@@ -2,9 +2,9 @@
   <div class="item-view" v-if="item">
     <template v-if="item">
       <div class="item-view-header">
-        <a>
-          <h1>{{ item.title }}</h1>
-        </a><br>
+        <h1>
+          <a>{{ item.title }}</a>
+        </h1><br>
         <span v-for="(label, idx) in item.type" :key="idx" class="label">
           {{ label }}
         </span>

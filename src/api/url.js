@@ -5,5 +5,6 @@ export default {
   TOP_TV        : '/movie/top',
   TOP_ARTICLE   : '/article/hot',
   LOGIN         : '/login',
-  REGISTER      : '/register'
+  REGISTER      : '/register',
+  USER_INFO     : '/u'
 }

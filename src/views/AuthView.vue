@@ -1,18 +1,18 @@
 <template>
   <div class="auth-view">
     <div class="auth-view-header">
-      <a>
-        <h1>{{ authTitle }}</h1>
-      </a>
+      <h1>
+        <a>{{ authTitle }}</a>
+      </h1>
     </div>
     <transition name="slide-fade">
       <div v-if="showErrorMsg" class="auth-view-error">
-        <a>
-          <h1>
+        <h1>
+          <a>
             <i class="fa fa-exclamation" aria-hidden="true"></i>
             {{ errorMsg }}
-          </h1>
-        </a>
+          </a>
+        </h1>
       </div>
     </transition>
     <div class="auth-view-details">
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import storage from 'store'
 import Spinner from '../components/Spinner.vue'
 import * as ajax from '../api'
 import url from '../api/url'
@@ -108,7 +109,10 @@ export default {
     },
 
     saveUser (data) {
-      this.$store.dispatch('SET_USER', { data })
+      this.$store.dispatch('SET_AUTHORIZATION', { data })
+      this.$store.dispatch('SET_USERID', { data })      
+      storage.set('authorization', data.data.Authorization)
+      storage.set('userId', data.data.info.userId)      
       this.$router.push({ path: '/movie/top' })
     },
 

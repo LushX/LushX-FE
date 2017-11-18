@@ -8,7 +8,7 @@
         <router-link :to="`/${ currentType }/top`">最热</router-link>
         <router-link :to="`/${ currentType }/new`">最新</router-link>
         <router-link to="/search">搜索</router-link>
-        <router-link to="/type">分类</router-link>        
+        <router-link to="/type">分类</router-link>
         <a class="login" @click="userHandle">{{ auth ? '个人中心' : '登录' }}</a>
       </nav>
     </header>
@@ -19,28 +19,48 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import storage from 'store'
+
 export default {
   name: 'app',
 
   computed: {
     auth () {
-      return this.$store.state.user.Authorization
+      return this.$store.state.authorization || ''
     },
     currentType () {
-      return this.$store.state.currentType   
+      return this.$store.state.currentType || 'movie'
     }
   },
 
   methods: {
     userHandle () {
       if(this.auth) {
-        let userId = this.$store.state.user.info.userId
-        this.$router.push({ path: `/user/${ userId }` })
+        this.$router.push({ path: `/user/${ this.$store.state.userId }` })
       } else {
         this.$router.push({ path: '/auth/login' })
       }
     }
+  },
+
+  mounted () {
+    this.$store.dispatch('SET_AUTHORIZATION', { 
+      data: {
+        data: {
+          authorization: ''
+        }
+      } 
+    })
+
+    this.$store.dispatch('SET_USERID', { 
+      data: {
+        data: {
+          info: {
+            userId: ''
+          }
+        }
+      } 
+    })
   }
 }
 </script>

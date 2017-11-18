@@ -37,8 +37,12 @@ export default {
     }
   },
 
-  SET_USER: (state, { data }) => {
-    state.user = data.data
+  SET_AUTHORIZATION: (state, { data }) => {
+    storage.get('authorization') ? state.authorization = storage.get('authorization') : state.authorization = data.data.Authorization
+  },
+
+  SET_USERID: (state, { data }) => {
+    storage.get('userId') ? state.userId = storage.get('userId') : state.userId = data.data.info.userId
   },
 
   SWITCH_TYPE: (state, { type }) => {

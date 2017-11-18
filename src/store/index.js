@@ -12,6 +12,8 @@ export function createStore () {
       itemsPerPage: 5,
       list: [],
       user: {},
+      authorization: '',
+      userId: '',
       currentType: 'movie'
     },
     actions,

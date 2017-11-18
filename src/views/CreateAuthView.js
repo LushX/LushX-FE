@@ -2,7 +2,7 @@ import AuthView from './AuthView.vue'
 
 const camelize = str => str.charAt(0).toUpperCase() + str.slice(1)
 
-export default function createListView (type) {
+export default function createAuthView (type) {
   return {
     name: `${ type }-type-view`,
 
