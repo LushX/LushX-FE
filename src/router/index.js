@@ -15,12 +15,12 @@ export function createRouter () {
     fallback: false,
     scrollBehavior: () => ({ y: 0 }),
     routes: [
-      { path: '/auth/:type', component: createAuthView('auth') },      
+      { path: '/auth/:type', component: createAuthView('auth') },
       { path: '/:type/top/:page(\\d+)', component: createListView('top') },
       { path: '/:type/top/detail/:id(\\d+)', component: ItemView },
       { path: '/error/:code', component: ErrorView },
-      { path: '/type', component: TypeView },      
-      { path: '/', redirect: '/movie/top' }
+      { path: '/type', component: TypeView },
+      { path: '/', redirect: '/type' }
     ]
   })
 }
