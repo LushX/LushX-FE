@@ -79,7 +79,6 @@ function render (req, res) {
   res.setHeader("Server", serverInfo)
 
   const handleError = err => {
-    console.log(err)
     if (err.url) {
       res.redirect(err.url)
     } else if(err.code === undefined) {

@@ -7,11 +7,14 @@ export default function createListView (type) {
     name: `${ type }-type-view`,
 
     asyncData ({ store, route }) {
+      store.dispatch('SWITCH_TYPE', { type: route.fullPath.split('/')[1] })
+
       const currentType = store.state.currentType
       const model = {
         page: route.params.page - 1,
         size: store.state.itemsPerPage
       }
+
       return store.dispatch('REQ_TOP_DATA', { type, currentType, model })
     },
 

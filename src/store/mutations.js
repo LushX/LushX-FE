@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import storage from 'store'
 
 export default {
   SET_ACTIVE_TYPE: (state, { type }) => {
@@ -41,6 +42,6 @@ export default {
   },
 
   SWITCH_TYPE: (state, { type }) => {
-    state.currentType = type
+    storage.get('currentType') ? state.currentType = storage.get('currentType') : state.currentType = type
   }
 }

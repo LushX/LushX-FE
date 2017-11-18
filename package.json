@@ -24,6 +24,7 @@
     "lru-cache": "^4.1.1",
     "route-cache": "0.4.3",
     "serve-favicon": "^2.4.4",
+    "store": "^2.0.12",
     "vue": "^2.4.4",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.4.4",

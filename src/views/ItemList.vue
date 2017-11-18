@@ -59,7 +59,6 @@ export default {
   },
 
   beforeMount () {
-    this.$bar.finish()    
     if (this.$root._isMounted) {
       this.loadItems(this.page)
     }
@@ -73,6 +72,7 @@ export default {
 
   methods: {
     loadItems (to = this.page, from = -1) {
+      this.$bar.start()      
       const model = {
         page: this.$route.params.page - 1,
         size: this.$store.state.itemsPerPage
@@ -87,6 +87,7 @@ export default {
           : to > from ? 'slide-left' : 'slide-right'
         this.displayedPage = to
         this.displayedItems = this.$store.state.list
+        this.$bar.finish()            
       })
     }
   }

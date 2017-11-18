@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import storage from 'store'
+
 export default {
   name: 'type-view',
 
@@ -62,6 +64,7 @@ export default {
   methods: {
     switchType (type) {
       this.$store.dispatch('SWITCH_TYPE', { type })
+      storage.set('currentType', type)
       this.$router.push({ path: `/${ this.currentType }/top/1` })
     }
   },

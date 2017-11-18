@@ -51,7 +51,6 @@ export default {
             url: url.TOP_ARTICLE,
             data: model
           }).then(data => {
-            console.log(data)
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
           })
