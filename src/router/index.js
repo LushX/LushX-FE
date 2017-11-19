@@ -19,8 +19,8 @@ export function createRouter () {
     routes: [
       { path: '/user/:id', component: createUserView('user') },
       { path: '/auth/:type', component: createAuthView('auth') },
-      { path: '/:type/top/:page(\\d+)', component: createListView('top') },
-      { path: '/:type/top/detail/:id(\\d+)', component: ItemView },
+      { path: '/:type/:sort/:page(\\d+)', component: createListView('top') },
+      { path: '/:type/:sort/detail/:id(\\d+)', component: ItemView },
       { path: '/error/:code', component: ErrorView },
       { path: '/type', component: TypeView },
       { path: '/', redirect: '/type' }

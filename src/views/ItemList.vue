@@ -1,10 +1,10 @@
 <template>
   <div class="list-view">
     <div class="news-list-nav">
-      <router-link v-if="page > 1" :to="`/${ currentType }/${ type }/${ (page - 1) }`">&lt; 上一页</router-link> 
+      <router-link v-if="page > 1" :to="`/${ currentType }/${ currentSort }/${ (page - 1) }`">&lt; 上一页</router-link> 
       <a v-else class="disabled">&lt; 上一页</a>
       <span>{{ page }}/{{ maxPage }}</span>
-      <router-link v-if="hasMore" :to="`/${ currentType }/${ type }/${ (page + 1) }`">下一页 &gt;</router-link>
+      <router-link v-if="hasMore" :to="`/${ currentType }/${ currentSort }/${ (page + 1) }`">下一页 &gt;</router-link>
       <a v-else class="disabled">下一页 &gt;</a>
     </div>
     <transition :name="transition">
@@ -55,7 +55,11 @@ export default {
 
     currentType () {
       return this.$store.state.currentType
-    }
+    },
+
+    currentSort () {
+      return this.$route.fullPath.split('/')[2] 
+    }   
   },
 
   beforeMount () {

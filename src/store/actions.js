@@ -2,17 +2,29 @@ import * as ajax from '../api'
 import url from '../api/url'
 
 export default {
-  REQ_TOP_DATA: ({ commit, dispatch }, { type, currentType, model }) => {
+  REQ_TOP_DATA: ({ commit, dispatch }, { type, currentType, currentSort, model }) => {
     commit('SET_ACTIVE_TYPE', { type })
 
     switch (currentType) {
       case 'movie': {
-        return ajax.get({
-            url: url.TOP_MOVIE
+        if(currentSort === 'top') {
+          return ajax.get({
+            url: url.TOP_MOVIE,
+            data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
           })
+        }
+        if(currentSort === 'new') {
+          return ajax.get({
+            url: url.NEW_MOVIE,
+            data: model
+          }).then(data => {
+            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_TOTAL_PAGE', { data })
+          })         
+        }
         break
       }
 

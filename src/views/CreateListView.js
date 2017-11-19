@@ -10,12 +10,13 @@ export default function createListView (type) {
       store.dispatch('SWITCH_TYPE', { type: route.fullPath.split('/')[1] })
 
       const currentType = store.state.currentType
+      const currentSort = route.fullPath.split('/')[2]
       const model = {
         page: route.params.page - 1,
         size: store.state.itemsPerPage
       }
 
-      return store.dispatch('REQ_TOP_DATA', { type, currentType, model })
+      return store.dispatch('REQ_TOP_DATA', { type, currentType, currentSort, model })
     },
 
     title: camelize(type),

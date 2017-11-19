@@ -13,19 +13,19 @@ export default {
   SET_TOP_LIST: (state, { data, currentType }) => {
     switch (currentType) {
       case 'movie':
-        // state.list = data.data.top
+        state.list = data.data.content
         break
 
       case 'animation':
-        // state.list = data.data.top
+        // state.list = data.data.content
         break
 
       case 'cam':
-        // state.list = data.data.top
+        // state.list = data.data.content
         break
 
       case 'tv':
-        // state.list = data.data.top
+        // state.list = data.data.content
         break
 
       case 'article':

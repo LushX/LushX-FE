@@ -9,7 +9,7 @@ export function createStore () {
   return new Vuex.Store({
     state: {
       totalPage: 1,
-      itemsPerPage: 5,
+      itemsPerPage: 20,
       list: [],
       user: {},
       authorization: '',
