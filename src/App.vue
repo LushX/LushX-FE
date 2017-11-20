@@ -29,7 +29,7 @@ export default {
       return this.$store.state.authorization || ''
     },
     currentType () {
-      return this.$store.state.currentType || 'movie'
+      return this.$store.state.currentType
     }
   },
 
@@ -49,6 +49,10 @@ export default {
         data: {
         }
       }
+    })
+
+    this.$store.dispatch('SWITCH_TYPE', {
+      type: ''
     })
 
     this.$store.dispatch('SET_AUTHORIZATION', {

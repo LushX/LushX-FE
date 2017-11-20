@@ -40,7 +40,7 @@ export default {
   },
 
   title () {
-    return this.article.title
+    return this.article.title || '文章'
   },
 
   mounted () {
@@ -48,10 +48,10 @@ export default {
       storage.remove('itemData')
       storage.set('itemData', this.article)
       this.$store.dispatch('SET_ITEMDATA', { data: this.article })
-      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, ' style="width:100%" src')
+      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')
     } else {
       this.$store.dispatch('SET_ITEMDATA', { data: {} })
-      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'src style="width:100%"')
+      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')
     }
   }
 }
