@@ -16,6 +16,12 @@
     <template v-else-if="currentType === 'movie'">
       <span class="label">{{ item.actor }}</span>
     </template>
+    <template v-else-if="currentType === 'animation'">
+      <span class="label">{{ item.type }}</span>
+    </template>
+    <template v-else-if="currentType === 'tv'">
+      <span class="label">{{ item.type }}</span>
+    </template>
   </li>
 </template>
 

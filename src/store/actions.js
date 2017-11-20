@@ -29,12 +29,24 @@ export default {
       }
 
       case 'animation': {
-        return ajax.get({
-            url: url.TOP_ANIMATION
+        if (currentSort === 'top') {
+          return ajax.get({
+              url: url.TOP_ANIMATION,
+              data: model
+            }).then(data => {
+              commit('SET_TOP_LIST', { data, currentType })
+              commit('SET_TOTAL_PAGE', { data })
+            })
+        }
+        if (currentSort === 'new') {
+          return ajax.get({
+            url: url.NEW_ANIMATION,
+            data: model            
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
           })
+        }
         break
       }
 
@@ -49,12 +61,24 @@ export default {
       }
 
       case 'tv': {
-        return ajax.get({
-            url: url.TOP_TV
+        if (currentSort === 'top') {
+          return ajax.get({
+              url: url.TOP_TV,
+              data: model
+            }).then(data => {
+              commit('SET_TOP_LIST', { data, currentType })
+              commit('SET_TOTAL_PAGE', { data })
+            })
+        }
+        if (currentSort === 'new') {
+          return ajax.get({
+            url: url.NEW_TV,
+            data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
-          })
+          })        
+        }
         break
       }
 
@@ -64,7 +88,6 @@ export default {
             url: url.TOP_ARTICLE,
             data: model
           }).then(data => {
-            // data.data.content = correctionContent
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
           })

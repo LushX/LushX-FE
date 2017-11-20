@@ -17,7 +17,7 @@ export default {
         break
 
       case 'animation':
-        // state.list = data.data.content
+        state.list = data.data.content
         break
 
       case 'cam':
@@ -25,7 +25,7 @@ export default {
         break
 
       case 'tv':
-        // state.list = data.data.content
+        state.list = data.data.content
         break
 
       case 'article':
