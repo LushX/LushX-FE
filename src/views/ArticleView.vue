@@ -92,4 +92,7 @@ export default {
   .article-view-header
     h1
       font-size 1.25em
+  .article-view-details
+    .article-content
+      padding 2em 0
 </style>
