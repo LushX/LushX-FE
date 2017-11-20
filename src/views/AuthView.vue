@@ -110,10 +110,10 @@ export default {
 
     saveUser (data) {
       this.$store.dispatch('SET_AUTHORIZATION', { data })
-      this.$store.dispatch('SET_USERID', { data })      
+      this.$store.dispatch('SET_USERID', { data })
       storage.set('authorization', data.data.Authorization)
-      storage.set('userId', data.data.info.userId)      
-      this.$router.push({ path: '/movie/top' })
+      storage.set('userId', data.data.info.userId)
+      this.$router.push({ path: '/movie/top/1' })
     },
 
     authActive () {

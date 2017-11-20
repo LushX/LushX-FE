@@ -34,19 +34,19 @@ export default {
         }, {
           name: '动漫',
           des: '最及时的动漫新番，最棒的ACG氛围',
-          value: 'animation'          
+          value: 'animation'
         }, {
           name: '综艺',
           des: '最热综艺等你发现',
-          value: 'cam'          
+          value: 'cam'
         }, {
           name: '电视',
           des: '这里包含国内最新的电视剧',
-          value: 'tv'          
+          value: 'tv'
         }, {
           name: '文章',
           des: '简书 7 日热门',
-          value: 'article'          
+          value: 'article'
         }
       ]
     }

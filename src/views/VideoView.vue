@@ -43,7 +43,6 @@ export default {
       if(this.$store.state.list[0]) {
         return this.$store.state.list.filter(item => {
           return item.videoId === this.$route.params.id
-          console.log(item)
         })[0]
       } else {
         return this.$store.state.itemData
@@ -56,10 +55,6 @@ export default {
   },
 
   mounted () {
-        let a = this.$store.state.list.filter(item => {
-          return item.videoId === this.$route.params.id
-        })
-        console.log(a)
     if(this.video.videoId) {
       storage.remove('itemData')
       storage.set('itemData', this.video)
@@ -113,10 +108,10 @@ export default {
       font-size 1.4em
   .video-play
     margin-top 2em
-    margin-bottom 2em    
+    margin-bottom 2em
     width 100%
     h1
-      font-size 1.4em   
+      font-size 1.4em
     .play-btn
       line-height 2.4em
       color #59BBA5
@@ -138,5 +133,5 @@ export default {
         font-size 1.1em
     .video-play
       h1
-        font-size 1.1em   
+        font-size 1.1em
 </style>

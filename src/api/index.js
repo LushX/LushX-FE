@@ -28,7 +28,6 @@ export const get = obj => {
 
   return new Promise((resolve,reject) => {
     axios.get(obj.url, { params: obj.data }).then(data => {
-      console.log(data)      
       resolve(data.data)
     }).catch(data => {
       reject(data.data)

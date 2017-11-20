@@ -23,7 +23,7 @@ export default {
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
-          })         
+          })
         }
         break
       }
@@ -74,10 +74,9 @@ export default {
             url: url.NEW_ARTICLE,
             data: model
           }).then(data => {
-            console.log(data)
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
-          })         
+          })
         }
         break
       }
@@ -95,6 +94,10 @@ export default {
     commit('SET_USERID', { data })
   },
 
+  SET_USER: ({ commit, dispatch }, { data }) => {
+    commit('SET_USER', { data })
+  },
+
   SET_ITEMDATA: ({ commit, dispatch }, { data }) => {
     commit('SET_ITEMDATA', { data })
   },
@@ -104,7 +107,7 @@ export default {
       url: url.USER_INFO,
       authorization: authorization
     }).then(data => {
-      console.log(data)
+      commit('SET_USER', { data })
     })
   },
 

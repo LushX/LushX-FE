@@ -15,7 +15,6 @@ export default function createListView (type) {
         page: route.params.page - 1,
         size: store.state.itemsPerPage
       }
-      console.log(currentSort)
       return store.dispatch('REQ_TOP_DATA', { type, currentType, currentSort, model })
     },
 

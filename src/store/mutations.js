@@ -51,5 +51,9 @@ export default {
 
   SET_ITEMDATA: (state, { data }) => {
     storage.get('itemData') ? state.itemData = storage.get('itemData') : state.itemData = data
+  },
+
+  SET_USER: (state, { data }) => {
+    storage.get('user') ? state.user = storage.get('user') : state.user = data.data
   }
 }

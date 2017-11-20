@@ -5,8 +5,8 @@
         <router-link to="/" exact>
           <img class="logo" src="~public/logo-48.png" alt="logo">
         </router-link>
-        <a :href="`/${ currentType }/top/1`">最热</a>
-        <a :href="`/${ currentType }/new/1`">最新</a>
+        <router-link :to="`/${ currentType }/top/1`">最热</router-link>
+        <router-link :to="`/${ currentType }/new/1`">最新</router-link>
         <router-link to="/search">搜索</router-link>
         <router-link to="/type">分类</router-link>
         <a class="login" @click="userHandle">{{ auth ? '个人中心' : '登录' }}</a>
@@ -44,6 +44,13 @@ export default {
   },
 
   mounted () {
+    this.$store.dispatch('SET_USER', {
+      data: {
+        data: {
+        }
+      }
+    })
+
     this.$store.dispatch('SET_AUTHORIZATION', {
       data: {
         data: {

@@ -2,7 +2,7 @@
   <div class="user-view">
     <div class="user-view-header">
       <h1>
-        <a>{{ user }}</a>
+        <a>{{ user.username }}</a>
       </h1>
     </div>
     <div class="user-view-details">
@@ -34,19 +34,17 @@ export default {
 
   computed: {
     user () {
-      return this.$store.state.userId
+      return this.$store.state.user || {}
     }
   },
 
-  data() {
-    return {
-      
-    }
-  },
-
-  methods: {
-    test() {
-      console.log(this.user)
+  beforeMount () {
+    if(this.$store.state.user) {
+      storage.remove('user')
+      storage.set('user', this.user)
+      this.$store.dispatch('SET_USER', { data: this.user })
+    } else {
+      this.$store.dispatch('SET_USER', { data: {} })
     }
   }
 }

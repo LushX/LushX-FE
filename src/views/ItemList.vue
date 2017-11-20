@@ -67,7 +67,6 @@ export default {
       this.loadItems(this.page)
     }
     this.displayedItems = this.$store.state.list
-
   },
 
   watch: {
