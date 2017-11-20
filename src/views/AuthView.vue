@@ -174,7 +174,8 @@ export default {
     font-size 1em
     margin 0
     margin-right .5em
-    color #CC3300
+    a
+      color #CC3300
 
 .auth-view-details
   background-color #fff
