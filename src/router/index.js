@@ -9,6 +9,7 @@ const createAuthView = type => () => import('../views/CreateAuthView').then(m =>
 const createUserView = type => () => import('../views/CreateUserView').then(m => m.default(type))
 const TypeView = () => import('../views/TypeView.vue')
 const ArticleView = () => import('../views/ArticleView.vue')
+const VideoView = () => import('../views/VideoView.vue')
 const ErrorView = () => import('../views/ErrorView.vue')
 
 export function createRouter () {
@@ -20,8 +21,12 @@ export function createRouter () {
       { path: '/user/:id', component: createUserView('user') },
       { path: '/auth/:type', component: createAuthView('auth') },
       { path: '/:type/top/:page(\\d+)', component: createListView('top') },
-      { path: '/:type/new/:page(\\d+)', component: createListView('new') },      
+      { path: '/:type/new/:page(\\d+)', component: createListView('new') },
       { path: '/article/:sort/detail/:id', component: ArticleView },
+      { path: '/movie/:sort/detail/:id', component: VideoView },
+      { path: '/animation/:sort/detail/:id', component: VideoView },
+      { path: '/cam/:sort/detail/:id', component: VideoView },
+      { path: '/tv/:sort/detail/:id', component: VideoView },
       { path: '/error/:code', component: ErrorView },
       { path: '/type', component: TypeView },
       { path: '/', redirect: '/type' }

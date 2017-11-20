@@ -141,7 +141,5 @@ a
     .inner
       padding 15px
     a
-      margin-right 1em
-    .github
-      display none
+      margin-right .6em
 </style>

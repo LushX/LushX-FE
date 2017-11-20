@@ -5,6 +5,10 @@ axios.defaults.headers['Content-Type'] = 'application/json' // 通信格式
 axios.defaults.baseURL = 'http://139.224.135.245:8080/lushx' // 开发环境接口地址
 // axios.defaults.baseURL = '' // 生产环境接口地址
 
+const setAuthorization = (token) => {
+  axios.defaults.headers['Authorization'] = token
+}
+
 // POST请求
 export const post = obj => {
   return new Promise((resolve,reject) => {
@@ -18,18 +22,12 @@ export const post = obj => {
 
 // GET请求
 export const get = obj => {
-  let headers = {}
-
   if(obj.authorization) {
-    headers = {
-      headers: {
-        'Authorization': obj.authorization
-      }
-    }
+    setAuthorization(obj.authorization)
   }
 
   return new Promise((resolve,reject) => {
-    axios.get(obj.url, { params: obj.data }, headers).then(data => {
+    axios.get(obj.url, { params: obj.data }).then(data => {
       console.log(data)      
       resolve(data.data)
     }).catch(data => {
