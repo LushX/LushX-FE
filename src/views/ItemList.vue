@@ -1,7 +1,7 @@
 <template>
   <div class="list-view">
     <div class="news-list-nav">
-      <router-link v-if="page > 1" :to="`/${ currentType }/${ currentSort }/${ (page - 1) }`">&lt; 上一页</router-link> 
+      <router-link v-if="page > 1" :to="`/${ currentType }/${ currentSort }/${ (page - 1) }`">&lt; 上一页</router-link>
       <a v-else class="disabled">&lt; 上一页</a>
       <span>{{ page }}/{{ maxPage }}</span>
       <router-link v-if="hasMore" :to="`/${ currentType }/${ currentSort }/${ (page + 1) }`">下一页 &gt;</router-link>
@@ -40,7 +40,7 @@ export default {
     }
   },
 
-  computed: {      
+  computed: {
     page () {
        return Number(this.$route.params.page) || 1
     },
@@ -58,25 +58,27 @@ export default {
     },
 
     currentSort () {
-      return this.$route.fullPath.split('/')[2] 
-    }   
+      return this.$route.fullPath.split('/')[2]
+    }
   },
 
   beforeMount () {
     if (this.$root._isMounted) {
       this.loadItems(this.page)
     }
+    this.displayedItems = this.$store.state.list
+
   },
 
   watch: {
-    page (to, from) {          
+    page (to, from) {
       this.loadItems(to, from)
     }
   },
 
   methods: {
     loadItems (to = this.page, from = -1) {
-      this.$bar.start()      
+      this.$bar.start()
       const model = {
         page: this.$route.params.page - 1,
         size: this.$store.state.itemsPerPage
@@ -91,7 +93,7 @@ export default {
           : to > from ? 'slide-left' : 'slide-right'
         this.displayedPage = to
         this.displayedItems = this.$store.state.list
-        this.$bar.finish()            
+        this.$bar.finish()
       })
     }
   }

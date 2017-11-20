@@ -15,6 +15,9 @@ const serverTitleMixin = {
         case 'Top':
           title = '最热'
           break
+        case 'New':
+          title = '最新'
+          break
         case 'Auth':
           title = '鉴权'
           break
@@ -33,6 +36,9 @@ const clientTitleMixin = {
       switch (title) {
         case 'Top':
           title = '最热'
+          break
+        case 'New':
+          title = '最新'
           break
         case 'Auth':
           title = '鉴权'

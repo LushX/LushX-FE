@@ -11,6 +11,7 @@ export function createStore () {
       totalPage: 1,
       itemsPerPage: 20,
       list: [],
+      itemData: {},
       user: {},
       authorization: '',
       userId: '',

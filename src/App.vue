@@ -44,22 +44,22 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('SET_AUTHORIZATION', { 
+    this.$store.dispatch('SET_AUTHORIZATION', {
       data: {
         data: {
           authorization: ''
         }
-      } 
+      }
     })
 
-    this.$store.dispatch('SET_USERID', { 
+    this.$store.dispatch('SET_USERID', {
       data: {
         data: {
           info: {
             userId: ''
           }
         }
-      } 
+      }
     })
   }
 }

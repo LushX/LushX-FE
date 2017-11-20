@@ -7,7 +7,7 @@ export default {
 
     switch (currentType) {
       case 'movie': {
-        if(currentSort === 'top') {
+        if (currentSort === 'top') {
           return ajax.get({
             url: url.TOP_MOVIE,
             data: model
@@ -16,7 +16,7 @@ export default {
             commit('SET_TOTAL_PAGE', { data })
           })
         }
-        if(currentSort === 'new') {
+        if (currentSort === 'new') {
           return ajax.get({
             url: url.NEW_MOVIE,
             data: model
@@ -59,13 +59,26 @@ export default {
       }
 
       case 'article': {
-        return ajax.get({
+        if (currentSort === 'top') {
+          return ajax.get({
             url: url.TOP_ARTICLE,
             data: model
           }).then(data => {
+            // data.data.content = correctionContent
             commit('SET_TOP_LIST', { data, currentType })
             commit('SET_TOTAL_PAGE', { data })
           })
+        }
+        if (currentSort === 'new') {
+          return ajax.get({
+            url: url.NEW_ARTICLE,
+            data: model
+          }).then(data => {
+            console.log(data)
+            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_TOTAL_PAGE', { data })
+          })         
+        }
         break
       }
 
@@ -80,6 +93,10 @@ export default {
 
   SET_USERID: ({ commit, dispatch }, { data }) => {
     commit('SET_USERID', { data })
+  },
+
+  SET_ITEMDATA: ({ commit, dispatch }, { data }) => {
+    commit('SET_ITEMDATA', { data })
   },
 
   REQ_USER_INFO: ({ commit, dispatch }, { authorization }) => {

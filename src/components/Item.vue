@@ -1,19 +1,21 @@
 <template>
   <li class="list-item">
     <template v-if="currentType === 'article'">
-      <span class="score"><i class="fa fa-book" aria-hidden="true"></i></span>      
+      <span class="score"><i class="fa fa-book" aria-hidden="true"></i></span>
     </template>
     <template v-else>
       <span class="score">{{ item.score }}</span>
     </template>
     <span class="title">
-      <router-link :to="`/${ currentType }/top/detail/${ item.id || item.videoId }`">{{ item.title }}</router-link>
+      <router-link :to="`/${ currentType }/${ currentSort }/detail/${ item.articleId || item.videoId }`">{{ item.title }}</router-link>
     </span>
     <br>
     <template v-if="currentType === 'article'">
-      <span class="label">{{ item.time | timeLabel }}</span>      
+      <span class="label">{{ item.time | timeLabel }}</span>
     </template>
-    <span class="label" v-for="(label, idx) in item.type" :key="idx">{{ label }}</span>
+    <template v-else-if="currentType === 'movie'">
+      <span class="label">{{ item.actor }}</span>
+    </template>
   </li>
 </template>
 
@@ -28,6 +30,10 @@ export default {
   computed: {
     currentType () {
       return this.$store.state.currentType
+    },
+
+    currentSort () {
+      return this.$route.fullPath.split('/')[2]
     }
   }
 }

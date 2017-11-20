@@ -47,5 +47,9 @@ export default {
 
   SWITCH_TYPE: (state, { type }) => {
     storage.get('currentType') ? state.currentType = storage.get('currentType') : state.currentType = type
+  },
+
+  SET_ITEMDATA: (state, { data }) => {
+    storage.get('itemData') ? state.itemData = storage.get('itemData') : state.itemData = data
   }
 }

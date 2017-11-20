@@ -8,7 +8,7 @@ const createListView = type => () => import('../views/CreateListView').then(m =>
 const createAuthView = type => () => import('../views/CreateAuthView').then(m => m.default(type))
 const createUserView = type => () => import('../views/CreateUserView').then(m => m.default(type))
 const TypeView = () => import('../views/TypeView.vue')
-const ItemView = () => import('../views/ItemView.vue')
+const ArticleView = () => import('../views/ArticleView.vue')
 const ErrorView = () => import('../views/ErrorView.vue')
 
 export function createRouter () {
@@ -19,8 +19,9 @@ export function createRouter () {
     routes: [
       { path: '/user/:id', component: createUserView('user') },
       { path: '/auth/:type', component: createAuthView('auth') },
-      { path: '/:type/:sort/:page(\\d+)', component: createListView('top') },
-      { path: '/:type/:sort/detail/:id(\\d+)', component: ItemView },
+      { path: '/:type/top/:page(\\d+)', component: createListView('top') },
+      { path: '/:type/new/:page(\\d+)', component: createListView('new') },      
+      { path: '/article/:sort/detail/:id', component: ArticleView },
       { path: '/error/:code', component: ErrorView },
       { path: '/type', component: TypeView },
       { path: '/', redirect: '/type' }
