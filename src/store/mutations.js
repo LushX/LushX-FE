@@ -54,6 +54,6 @@ export default {
   },
 
   SET_USER: (state, { data }) => {
-    storage.get('user') ? state.user = storage.get('user') : state.user = data.data
+    storage.get('user') ? state.user = storage.get('user') : state.user = data
   }
 }

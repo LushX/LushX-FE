@@ -121,16 +121,6 @@ export default {
     commit('SET_USER', { data })
   },
 
-  UPDATE_USER: ({ commit, dispatch }, { model }) => {
-    console.log(model)
-    return ajax.post({
-      url: url.UPDATE_USER,
-      data: model
-    }).then(data => {
-      console.log(data)
-    })
-  },
-
   SET_ITEMDATA: ({ commit, dispatch }, { data }) => {
     commit('SET_ITEMDATA', { data })
   },
@@ -140,7 +130,7 @@ export default {
       url: url.USER_INFO,
       authorization: authorization
     }).then(data => {
-      commit('SET_USER', { data })
+      commit('SET_USER', { data: data.data })
     })
   },
 

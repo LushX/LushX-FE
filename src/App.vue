@@ -45,14 +45,11 @@ export default {
 
   mounted () {
     this.$store.dispatch('SET_USER', {
-      data: {
-        data: {
-        }
-      }
+      data: {}
     })
 
     this.$store.dispatch('SWITCH_TYPE', {
-      type: ''
+      type: 'movie'
     })
 
     this.$store.dispatch('SET_AUTHORIZATION', {
