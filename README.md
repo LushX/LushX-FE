@@ -2,6 +2,8 @@
 
 A diversified online play website
 
+![rendering.jpeg](http://oz2yhn98k.bkt.clouddn.com/Rendering.jpeg)
+
 ## 📖 Documentation
 
 Coming soon
