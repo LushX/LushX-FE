@@ -58,9 +58,9 @@ export default {
   },
 
   SET_VIDEO_URL: (state, { data }) => {
-    storage.get('videoUrl') ? state.videoUrl = storage.get('videoUrl') : !function () {
+    // storage.get('videoUrl') ? state.videoUrl = storage.get('videoUrl') : !function () {
       state.videoUrl = data
-      storage.set('videoUrl', data)
-    }()
+      // storage.set('videoUrl', data)
+    // }()
   },
 }
