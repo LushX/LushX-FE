@@ -109,6 +109,18 @@ export default {
     }
   },
 
+  REQ_VIDEO_URL: ({ commit, dispatch }, { data }) => {
+    return ajax.get({
+      url: url.VIDEO_PLAY,
+      data: {
+        url: data
+      }
+    }).then(data => {
+      console.log(data)
+      commit('SET_VIDEO_URL', { data: data.data })
+    })
+  },
+
   SET_AUTHORIZATION: ({ commit, dispatch }, { data }) => {
     commit('SET_AUTHORIZATION', { data })
   },

@@ -15,6 +15,7 @@ export function createStore () {
       user: {},
       authorization: '',
       userId: '',
+      videoUrl: '',
       currentType: 'movie'
     },
     actions,

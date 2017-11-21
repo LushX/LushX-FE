@@ -25,7 +25,7 @@
         <div class="video-play">
           <h1>立即播放</h1>
           <a class="play-btn" :href="video.value" target="_blank">视频源址</a><br>
-          <a v-show="video.playUrl" class="play-btn" :href="video.playUrl">在线播放</a>
+          <router-link class="play-btn" :to="`play/${ video.videoId }`">在线播放</router-link>
         </div>
       </div>
     </template>
@@ -47,6 +47,10 @@ export default {
       } else {
         return this.$store.state.itemData
       }
+    },
+
+    currentType () {
+      return this.$store.state.currentType
     }
   },
 

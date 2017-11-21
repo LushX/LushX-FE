@@ -23,6 +23,8 @@ const serverTitleMixin = {
           break
         case 'User':
           title = '个人中心'
+        case 'Play':
+          title = '播放'
           break
         default:
           break
@@ -48,6 +50,9 @@ const clientTitleMixin = {
           break
         case 'User':
           title = '个人中心'
+          break
+        case 'Play':
+          title = '播放'
           break
         default:
           break

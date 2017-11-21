@@ -7,6 +7,7 @@ Vue.use(Router)
 const createListView = type => () => import('../views/CreateListView').then(m => m.default(type))
 const createAuthView = type => () => import('../views/CreateAuthView').then(m => m.default(type))
 const createUserView = type => () => import('../views/CreateUserView').then(m => m.default(type))
+const createPlayerView = type => () => import('../views/createPlayerView').then(m => m.default(type))
 const TypeView = () => import('../views/TypeView.vue')
 const ArticleView = () => import('../views/ArticleView.vue')
 const VideoView = () => import('../views/VideoView.vue')
@@ -27,6 +28,7 @@ export function createRouter () {
       { path: '/animation/:sort/detail/:id', component: VideoView },
       { path: '/cam/:sort/detail/:id', component: VideoView },
       { path: '/tv/:sort/detail/:id', component: VideoView },
+      { path: '/movie/:sort/detail/play/:id', component: createPlayerView('play') },      
       { path: '/error/:code', component: ErrorView },
       { path: '/type', component: TypeView },
       { path: '/', redirect: '/type' }

@@ -55,5 +55,12 @@ export default {
 
   SET_USER: (state, { data }) => {
     storage.get('user') ? state.user = storage.get('user') : state.user = data
-  }
+  },
+
+  SET_VIDEO_URL: (state, { data }) => {
+    storage.get('videoUrl') ? state.videoUrl = storage.get('videoUrl') : !function () {
+      state.videoUrl = data
+      storage.set('videoUrl', data)
+    }()
+  },
 }
