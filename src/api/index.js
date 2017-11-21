@@ -11,6 +11,12 @@ const setAuthorization = (token) => {
 
 // POST请求
 export const post = obj => {
+  if(obj.data.authorization) {
+    setAuthorization(obj.data.authorization)
+  }
+
+  console.log(obj.data.authorization)
+
   return new Promise((resolve,reject) => {
     axios.post(obj.url, obj.data).then(data => {
       resolve(data.data)
@@ -28,21 +34,6 @@ export const get = obj => {
 
   return new Promise((resolve,reject) => {
     axios.get(obj.url, { params: obj.data }).then(data => {
-      resolve(data.data)
-    }).catch(data => {
-      reject(data.data)
-    })
-  })
-}
-
-// PUT请求
-export const put = obj => {
-  if(obj.authorization) {
-    setAuthorization(obj.authorization)
-  }
-
-  return new Promise((resolve,reject) => {
-    axios.put(obj.url, obj.data).then(data => {
       resolve(data.data)
     }).catch(data => {
       reject(data.data)

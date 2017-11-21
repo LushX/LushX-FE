@@ -114,7 +114,7 @@ export default {
       this.loading = !this.loading
       this.model.authorization = this.$store.state.authorization
       if(this.validate(this.model, this.confirmPassword)) {
-        this.$store.dispatch('UPDATE_USER', this.model).then(() => {
+        this.$store.dispatch('UPDATE_USER', { model: this.model }).then(() => {
           this.loading = !this.loading
         })
       } else {

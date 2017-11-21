@@ -122,7 +122,8 @@ export default {
   },
 
   UPDATE_USER: ({ commit, dispatch }, { model }) => {
-    return ajax.put({
+    console.log(model)
+    return ajax.post({
       url: url.UPDATE_USER,
       data: model
     }).then(data => {

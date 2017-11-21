@@ -1,7 +1,7 @@
 <template>
   <li class="list-item">
     <template v-if="currentType === 'article'">
-      <span class="score"><i class="fa fa-book" aria-hidden="true"></i></span>
+      <img class="article-poster" :src="item.image">
     </template>
     <template v-else>
       <span class="score">{{ item.score }}</span>
@@ -52,6 +52,14 @@ export default {
   border-bottom 1px solid #eee
   position relative
   line-height 20px
+  .article-poster
+    position: absolute;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin-top: -9px;
+    border-radius 10px
   .score
     color #59BBA5
     font-size 1.1em
