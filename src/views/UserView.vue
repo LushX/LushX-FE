@@ -229,7 +229,7 @@ export default {
 
 .user-view-details
   background-color #fff
-  padding 1em 2em .5em
+  padding 1em 2em
   margin-top 10px
   .user-option-title
     font-size 1.2em
@@ -273,9 +273,6 @@ export default {
     h1
       font-size 1.25em
   .user-view-details
-    background-color #fff
-    padding 1em 2em .5em
-    margin-top 10px
     .user-option-title
       font-size 1em
 </style>
