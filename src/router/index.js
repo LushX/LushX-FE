@@ -28,7 +28,7 @@ export function createRouter () {
       { path: '/animation/:sort/detail/:id', component: VideoView },
       { path: '/cam/:sort/detail/:id', component: VideoView },
       { path: '/tv/:sort/detail/:id', component: VideoView },
-      { path: '/movie/:sort/detail/play/:id', component: createPlayerView('play') },      
+      { path: '/:type/:sort/detail/play/:id', component: createPlayerView('play') },      
       { path: '/error/:code', component: ErrorView },
       { path: '/type', component: TypeView },
       { path: '/', redirect: '/type' }
