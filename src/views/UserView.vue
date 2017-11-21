@@ -2,7 +2,7 @@
   <div class="user-view">
     <div class="user-view-header">
       <h1>
-        <a>欢迎 {{ user.username }}</a>
+        <a>欢迎 <span>{{ user.username }}</span></a>
       </h1>
     </div>
     <transition name="slide-fade">
@@ -205,6 +205,8 @@ export default {
     font-size 1.5em
     margin 0
     margin-right .5em
+    span
+      color #59BBA5
 
 .user-view-info
   background-color #fff
