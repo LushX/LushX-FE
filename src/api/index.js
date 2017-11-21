@@ -34,3 +34,18 @@ export const get = obj => {
     })
   })
 }
+
+// PUT请求
+export const put = obj => {
+  if(obj.authorization) {
+    setAuthorization(obj.authorization)
+  }
+
+  return new Promise((resolve,reject) => {
+    axios.put(obj.url, obj.data).then(data => {
+      resolve(data.data)
+    }).catch(data => {
+      reject(data.data)
+    })
+  })
+}

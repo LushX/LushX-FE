@@ -10,5 +10,6 @@ export default {
   NEW_ARTICLE   : '/article/new',
   LOGIN         : '/login',
   REGISTER      : '/register',
-  USER_INFO     : '/u'
+  USER_INFO     : '/u',
+  UPDATE_USER   : '/u'
 }

@@ -2,39 +2,124 @@
   <div class="user-view">
     <div class="user-view-header">
       <h1>
-        <a>{{ user.username }}</a>
+        <a>欢迎 <span>{{ user.username }}</span></a>
       </h1>
     </div>
+    <transition name="slide-fade">
+      <div v-if="showErrorMsg" class="user-view-error">
+        <h1>
+          <a>
+            <i class="fa fa-exclamation" aria-hidden="true"></i>
+            {{ errorMsg }}
+          </a>
+        </h1>
+      </div>
+    </transition>
     <div class="user-view-details">
+      <h2 class="user-option-title">信息修改（选填）</h2>
       <div class="user-view-item">
         <label for="用户名">
           <i class="fa fa-user" aria-hidden="true"></i>
         </label>
-        <input type="text" placeholder="请输入用户名">
+        <input v-model="model.username" type="text" placeholder="请输入用户名">
       </div>
       <div class="user-view-item">
         <label for="密码">
           <i class="fa fa-lock" aria-hidden="true"></i>
         </label>
-        <input type="password" placeholder="请输入密码">
+        <input v-model="model.password" type="password" placeholder="请输入密码">
+      </div>
+      <div class="user-view-item">
+        <label for="密码">
+          <i class="fa fa-lock" aria-hidden="true"></i>
+        </label>
+        <input v-model="confirmPassword" type="password" placeholder="请确认密码">
+      </div>
+      <spinner :show="loading"></spinner>
+      <div v-show="!loading" class="user-view-item">
+        <a @click="updateUser" class="user-option">保存修改 </a>
+      </div>
+    </div>
+    <div class="user-view-details">
+      <h2 class="user-option-title">我的收藏</h2>
+      <div class="user-view-item">
+        <p>暂无收藏</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Spinner from '../components/Spinner.vue'
 import storage from 'store'
 
 export default {
   name: 'user-view',
 
+  data () {
+    return {
+      model: {
+        username: '',
+        password: '',
+        authorization: ''
+      },
+      confirmPassword: '',
+      loading: false,
+      errorMsg: '',
+      showErrorMsg: false
+    }
+  },
+
   title () {
     return '个人中心'
+  },
+
+  components: {
+    Spinner
   },
 
   computed: {
     user () {
       return this.$store.state.user || {}
+    }
+  },
+
+  methods: {
+    validate (model, confirmPassword) {
+      if (confirmPassword || this.model.password) {
+        if (!model.password.trim().length || model.password.length > 20) {
+          this.makeErrorMsg('请输入有效密码')
+          return false
+        } else if (model.password !== confirmPassword) {
+          this.makeErrorMsg('两次密码不一致')
+          return false
+        } else {
+          return true
+        }
+      } else {
+        return true
+      }
+    },
+
+    makeErrorMsg (errorMsg) {
+      this.errorMsg = errorMsg
+      this.showErrorMsg = !this.showErrorMsg
+      setTimeout(() => {
+        this.showErrorMsg = !this.showErrorMsg
+        this.errorMsg = ''
+      }, 1500)
+    },
+
+    updateUser () {
+      this.loading = !this.loading
+      this.model.authorization = this.$store.state.authorization
+      if(this.validate(this.model, this.confirmPassword)) {
+        this.$store.dispatch('UPDATE_USER', this.model).then(() => {
+          this.loading = !this.loading
+        })
+      } else {
+        this.loading = !this.loading        
+      }
     }
   },
 
@@ -60,12 +145,33 @@ export default {
     font-size 1.5em
     margin 0
     margin-right .5em
+    a
+      span
+        color #59BBA5
+
+.user-view-error
+  background-color #fff
+  margin-top 10px
+  padding 1.8em 2em
+  box-shadow 0 1px 2px rgba(0,0,0,.1)
+  h1
+    display inline
+    font-size 1em
+    margin 0
+    margin-right .5em
+    a
+      color #CC3300
 
 .user-view-details
   background-color #fff
+  padding 1em 2em .5em
   margin-top 10px
+  .user-option-title
+    font-size 1.2em
   .user-view-item
     padding 1.5em 1em
+    p
+      color #757475
     label
       font-size 1.2em
       margin 0
@@ -78,9 +184,29 @@ export default {
       line-height 2em
       font-size 1.2em
       color: #59BBA5
+    .user-option
+      color #59BBA5
+      cursor pointer
+
+.slide-fade-enter-active
+  transition all .3s ease
+
+.slide-fade-leave-active
+  transition all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+
+.slide-fade-enter,
+.slide-fade-leave-to
+  transform translateX(10px)
+  opacity 0
 
 @media (max-width 600px)
-  .type-view-header
+  .user-view-header
     h1
       font-size 1.25em
+  .user-view-details
+    background-color #fff
+    padding 1em 2em .5em
+    margin-top 10px
+    .user-option-title
+      font-size 1em
 </style>
