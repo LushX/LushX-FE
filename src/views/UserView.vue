@@ -131,7 +131,7 @@ export default {
         }
       } else if (!model.username.length && !confirmPassword && !model.password) {
         this.makeErrorMsg('请输入修改内容')
-        return false       
+        return false
       } else {
         return true
       }
@@ -156,17 +156,15 @@ export default {
     },
 
     saveUser (data) {
-      storage.set('authorization', data.data.Authorization)
-      storage.set('userId', data.data.info.userId)
-      storage.set('user', data.data.info)
-      this.$store.dispatch('SET_AUTHORIZATION', { data })
-      this.$store.dispatch('SET_USERID', { data })
+      storage.remove('authorization')
+      storage.remove('user')
+      this.$store.dispatch('SET_AUTHORIZATION', { data: data.data.Authorization })
+      this.$store.dispatch('SET_USERID', { data: data.data.info.userId })
       this.$store.dispatch('SET_USER', { data: data.data.info })
       this.makeSuccessMsg('修改成功')
     },
 
     updateUser () {
-      console.log(this.model.username.length)
       this.loading = !this.loading
       this.model.authorization = this.$store.state.authorization
       if(this.validate(this.model, this.confirmPassword)) {
@@ -186,10 +184,9 @@ export default {
   beforeMount () {
     if(this.$store.state.user) {
       storage.remove('user')
-      storage.set('user', this.user)
       this.$store.dispatch('SET_USER', { data: this.user })
     } else {
-      this.$store.dispatch('SET_USER', { data: {} })
+      this.$store.dispatch('SET_USER', { data: null })
     }
   }
 }

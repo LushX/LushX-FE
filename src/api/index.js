@@ -15,8 +15,6 @@ export const post = obj => {
     setAuthorization(obj.data.authorization)
   }
 
-  console.log(obj.data.authorization)
-
   return new Promise((resolve,reject) => {
     axios.post(obj.url, obj.data).then(data => {
       resolve(data.data)

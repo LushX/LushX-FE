@@ -6,7 +6,7 @@ export default function createUserView (type) {
   return {
     name: `${ type }-view`,
 
-    asyncData ({ store, route }) {
+    asyncData ({ store }) {
       return store.dispatch('REQ_USER_INFO', { authorization: store.state.authorization })
     },
 

@@ -55,17 +55,14 @@ export default {
   computed: {
     code () {
       return this.$route.params.code
-    },
-    currentType () {
-      return this.$store.state.currentType
     }
   },
 
   methods: {
     switchType (type) {
+      storage.remove('currentType')
       this.$store.dispatch('SWITCH_TYPE', { type })
-      storage.set('currentType', type)
-      this.$router.push({ path: `/${ this.currentType }/top/1` })
+      this.$router.push({ path: `/${ type }/top/1` })
     }
   },
 

@@ -2,7 +2,7 @@
   <div id="app">
     <header class="header">
       <nav class="inner">
-        <router-link to="/" exact>
+        <router-link to="/about" exact>
           <img class="logo" src="~public/logo-48.png" alt="logo">
         </router-link>
         <router-link :to="`/${ currentType }/top/1`">最热</router-link>
@@ -44,31 +44,13 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('SET_USER', {
-      data: {}
-    })
+    this.$store.dispatch('SET_USER', { data: '' })
 
-    this.$store.dispatch('SWITCH_TYPE', {
-      type: 'movie'
-    })
+    this.$store.dispatch('SET_USERID', { data: '' })
 
-    this.$store.dispatch('SET_AUTHORIZATION', {
-      data: {
-        data: {
-          authorization: ''
-        }
-      }
-    })
+    this.$store.dispatch('SET_AUTHORIZATION', { data: '' })
 
-    this.$store.dispatch('SET_USERID', {
-      data: {
-        data: {
-          info: {
-            userId: ''
-          }
-        }
-      }
-    })
+    this.$store.dispatch('SWITCH_TYPE', { type: 'movie' })
   }
 }
 </script>

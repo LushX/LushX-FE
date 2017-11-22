@@ -1,16 +1,16 @@
 export default {
-  TOP_MOVIE     : '/video/movie/hot',
-  NEW_MOVIE     : '/video/movie/new',
   TOP_ANIMATION : '/video/cartoon/hot',
   NEW_ANIMATION : '/video/cartoon/new',
-  TOP_CAM       : '/movie/top',
+  TOP_MOVIE     : '/video/movie/hot',
+  NEW_MOVIE     : '/video/movie/new',
   TOP_TV        : '/video/tv/hot',
-  NEW_TV        : '/video/tv/new',  
+  NEW_TV        : '/video/tv/new',
   TOP_ARTICLE   : '/article/hot',
   NEW_ARTICLE   : '/article/new',
-  LOGIN         : '/login',
+  TOP_CAM       : '/movie/top',
   REGISTER      : '/register',
+  VIDEO_PLAY    : '/api/video',
+  LOGIN         : '/login',
   USER_INFO     : '/u',
-  UPDATE_USER   : '/u',
-  VIDEO_PLAY    : '/api/video'
+  UPDATE_USER   : '/u'
 }

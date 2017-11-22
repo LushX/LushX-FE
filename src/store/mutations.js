@@ -7,7 +7,7 @@ export default {
   },
 
   SET_TOTAL_PAGE: (state, { data }) => {
-    state.totalPage = Number(data.data.totalPages)
+    state.totalPage = Number(data)
   },
 
   SET_TOP_LIST: (state, { data, currentType }) => {
@@ -38,29 +38,51 @@ export default {
   },
 
   SET_AUTHORIZATION: (state, { data }) => {
-    storage.get('authorization') ? state.authorization = storage.get('authorization') : state.authorization = data.data.Authorization
+    storage.get('authorization')
+      ? state.authorization = storage.get('authorization')
+      : !function () {
+        state.authorization = data
+        storage.set('authorization', data)
+      } ()
   },
 
   SET_USERID: (state, { data }) => {
-    storage.get('userId') ? state.userId = storage.get('userId') : state.userId = data.data.info.userId
+    storage.get('userId')
+      ? state.userId = storage.get('userId')
+      : !function () {
+        state.userId = data
+        storage.set('userId', data)
+      } ()
   },
 
   SWITCH_TYPE: (state, { type }) => {
-    storage.get('currentType') ? state.currentType = storage.get('currentType') : state.currentType = type
+    storage.get('currentType')
+      ? state.currentType = storage.get('currentType')
+      : !function () {
+        state.currentType = type
+        storage.set('currentType', type)
+      } ()
   },
 
   SET_ITEMDATA: (state, { data }) => {
-    storage.get('itemData') ? state.itemData = storage.get('itemData') : state.itemData = data
+    storage.get('itemData')
+      ? state.itemData = storage.get('itemData')
+      : !function () {
+        state.itemData = data
+        storage.set('itemData', data)
+      } ()
   },
 
   SET_USER: (state, { data }) => {
-    storage.get('user') ? state.user = storage.get('user') : state.user = data
+    storage.get('user')
+      ? state.user = storage.get('user')
+      : !function () {
+        state.user = data
+        storage.set('user', data)
+      } ()
   },
 
   SET_VIDEO_URL: (state, { data }) => {
-    // storage.get('videoUrl') ? state.videoUrl = storage.get('videoUrl') : !function () {
-      state.videoUrl = data
-      // storage.set('videoUrl', data)
-    // }()
+    state.videoUrl = data
   },
 }

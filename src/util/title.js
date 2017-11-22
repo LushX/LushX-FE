@@ -18,9 +18,6 @@ const serverTitleMixin = {
         case 'New':
           title = '最新'
           break
-        case 'Auth':
-          title = '鉴权'
-          break
         case 'User':
           title = '个人中心'
         case 'Play':
@@ -44,9 +41,6 @@ const clientTitleMixin = {
           break
         case 'New':
           title = '最新'
-          break
-        case 'Auth':
-          title = '鉴权'
           break
         case 'User':
           title = '个人中心'

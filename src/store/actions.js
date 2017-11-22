@@ -13,7 +13,7 @@ export default {
             data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
-            commit('SET_TOTAL_PAGE', { data })
+            commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
         if (currentSort === 'new') {
@@ -22,7 +22,7 @@ export default {
             data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
-            commit('SET_TOTAL_PAGE', { data })
+            commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
         break
@@ -35,16 +35,16 @@ export default {
               data: model
             }).then(data => {
               commit('SET_TOP_LIST', { data, currentType })
-              commit('SET_TOTAL_PAGE', { data })
+              commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
             })
         }
         if (currentSort === 'new') {
           return ajax.get({
             url: url.NEW_ANIMATION,
-            data: model            
+            data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
-            commit('SET_TOTAL_PAGE', { data })
+            commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
         break
@@ -55,7 +55,7 @@ export default {
             url: url.TOP_CAM
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
-            commit('SET_TOTAL_PAGE', { data })
+            commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         break
       }
@@ -67,7 +67,7 @@ export default {
               data: model
             }).then(data => {
               commit('SET_TOP_LIST', { data, currentType })
-              commit('SET_TOTAL_PAGE', { data })
+              commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
             })
         }
         if (currentSort === 'new') {
@@ -76,8 +76,8 @@ export default {
             data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
-            commit('SET_TOTAL_PAGE', { data })
-          })        
+            commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
+          })
         }
         break
       }
@@ -89,7 +89,7 @@ export default {
             data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
-            commit('SET_TOTAL_PAGE', { data })
+            commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
         if (currentSort === 'new') {
@@ -98,7 +98,7 @@ export default {
             data: model
           }).then(data => {
             commit('SET_TOP_LIST', { data, currentType })
-            commit('SET_TOTAL_PAGE', { data })
+            commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
         break

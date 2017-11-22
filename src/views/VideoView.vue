@@ -61,7 +61,6 @@ export default {
   mounted () {
     if(this.video.videoId) {
       storage.remove('itemData')
-      storage.set('itemData', this.video)
       this.$store.dispatch('SET_ITEMDATA', { data: this.video })
     } else {
       this.$store.dispatch('SET_ITEMDATA', { data: {} })

@@ -46,7 +46,6 @@ export default {
   mounted () {
     if(this.article.articleId) {
       storage.remove('itemData')
-      storage.set('itemData', this.article)
       this.$store.dispatch('SET_ITEMDATA', { data: this.article })
       this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')
     } else {

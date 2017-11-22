@@ -69,6 +69,10 @@ export default {
     }
   },
 
+  title () {
+    return '鉴权'
+  },
+
   components: {
     Spinner
   },
@@ -109,10 +113,8 @@ export default {
     },
 
     saveUser (data) {
-      this.$store.dispatch('SET_AUTHORIZATION', { data })
-      this.$store.dispatch('SET_USERID', { data })
-      storage.set('authorization', data.data.Authorization)
-      storage.set('userId', data.data.info.userId)
+      this.$store.dispatch('SET_AUTHORIZATION', { data: data.data.Authorization })
+      this.$store.dispatch('SET_USERID', { data: data.data.info.userId })
       this.$router.push({ path: '/movie/top/1' })
     },
 

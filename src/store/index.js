@@ -8,15 +8,15 @@ Vue.use(Vuex)
 export function createStore () {
   return new Vuex.Store({
     state: {
-      totalPage: 1,
-      itemsPerPage: 20,
-      list: [],
-      itemData: {},
-      user: {},
-      authorization: '',
-      userId: '',
-      videoUrl: '',
-      currentType: 'movie'
+      authorization : '',
+      itemsPerPage  : 20,
+      currentType   : 'movie',
+      totalPage     : 1,
+      itemData      : {},
+      videoUrl      : '',
+      userId        : '',
+      user          : {},
+      list          : []
     },
     actions,
     mutations
