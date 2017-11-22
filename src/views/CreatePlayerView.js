@@ -7,7 +7,6 @@ export default function createPlayerView (type) {
     name: `${ type }-view`,
 
     asyncData ({ store }) {
-      console.log(store.state.itemData.value)
       return store.dispatch('REQ_VIDEO_URL', { data: store.state.itemData.value })
     },
 

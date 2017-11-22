@@ -62,4 +62,10 @@ export default {
   .player-view-header
     h1
       font-size 1.25em
+.player-view-details
+  padding 1em 1em
+  .video-container
+    width 100%
+    .video
+      width 100%
 </style>

@@ -1,8 +1,9 @@
+
 # 🎬 LushX-FE
 
-A diversified online play website
+> A diversified online play website
 
-![rendering.jpeg](http://oz2yhn98k.bkt.clouddn.com/Rendering.jpeg)
+![lishx.jpeg](http://oz2yhn98k.bkt.clouddn.com/lushx.jpg)
 
 ## 📖 Documentation
 
