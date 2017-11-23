@@ -6,6 +6,12 @@ import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
 
+if (process.browser) {
+  const VueVideoPlayer = require('vue-video-player/ssr')
+  require('videojs-contrib-hls/dist/videojs-contrib-hls')
+  Vue.use(VueVideoPlayer)
+}
+
 Vue.mixin(titleMixin)
 
 Object.keys(filters).forEach(key => {
