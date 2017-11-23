@@ -112,7 +112,7 @@ export default {
 
 .video-js
     width 100%
-    height 360px
+    height 30em
 
 @media (max-width 600px)
   .player-view-header
@@ -124,4 +124,7 @@ export default {
       width 100%
       .video
         width 100%
+  .video-js
+    width 100%
+    height 16em
 </style>
