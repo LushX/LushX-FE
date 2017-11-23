@@ -89,7 +89,9 @@ export default {
         }
         this.transition = from === -1
           ? null
-          : to > from ? 'slide-left' : 'slide-right'
+          : to > from
+          ? 'slide-left'
+          : 'slide-right'
         this.displayedPage = to
         this.displayedItems = this.$store.state.list
         this.$bar.finish()

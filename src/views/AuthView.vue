@@ -79,7 +79,9 @@ export default {
 
   computed: {
     authTitle () {
-      return this.$route.params.type === 'login' ? '登录' : '注册'
+      return this.$route.params.type === 'login'
+        ? '登录'
+        : '注册'
     }
   },
 
@@ -127,7 +129,9 @@ export default {
             data: this.model
           }).then(data => {
             this.loading = !this.loading
-            data.status === 0 ? this.saveUser(data) : this.makeErrorMsg(data.msg)
+            data.status === 0
+              ? this.saveUser(data)
+              : this.makeErrorMsg(data.msg)
           })
         }
       } else {
@@ -138,7 +142,9 @@ export default {
             data: this.model
           }).then(data => {
             this.loading = !this.loading
-            data.status === 0 ? this.$router.push({ path: '/auth/login' }) : this.makeErrorMsg(data.msg)
+            data.status === 0
+              ? this.$router.push({ path: '/auth/login' })
+              : this.makeErrorMsg(data.msg)
           })
         }
       }

@@ -172,7 +172,9 @@ export default {
           url: url.UPDATE_USER,
           data: this.model
         }).then(data => {
-          data.status === 0 ? this.saveUser(data) : this.makeErrorMsg('修改失败')
+          data.status === 0
+            ? this.saveUser(data)
+            : this.makeErrorMsg('修改失败')
           this.loading = !this.loading
         })
       } else {
