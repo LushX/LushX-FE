@@ -15,7 +15,7 @@ export default function createListView (type) {
         page: route.params.page - 1,
         size: store.state.itemsPerPage
       }
-      return store.dispatch('REQ_TOP_DATA', { type, currentType, currentSort, model })
+      return store.dispatch('REQ_LIST_DATA', { type, currentType, currentSort, model })
     },
 
     title: camelize(type),

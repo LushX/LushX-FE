@@ -2,15 +2,24 @@ import Vue from 'vue'
 import storage from 'store'
 
 export default {
+  /**
+   * 保存动态Title
+   */
   SET_ACTIVE_TYPE: (state, { type }) => {
     state.activeType = type
   },
 
+  /**
+   * 保存总页数
+   */
   SET_TOTAL_PAGE: (state, { data }) => {
     state.totalPage = Number(data)
   },
 
-  SET_TOP_LIST: (state, { data, currentType }) => {
+  /**
+   * 保存列表数据
+   */
+  SET_LIST_DATA: (state, { data, currentType }) => {
     switch (currentType) {
       case 'movie':
         state.list = data.data.content
@@ -37,6 +46,9 @@ export default {
     }
   },
 
+  /**
+   * 保存用户Token
+   */
   SET_AUTHORIZATION: (state, { data }) => {
     storage.get('authorization')
       ? state.authorization = storage.get('authorization')
@@ -46,6 +58,9 @@ export default {
       } ()
   },
 
+  /**
+   * 保存用户Id
+   */
   SET_USERID: (state, { data }) => {
     storage.get('userId')
       ? state.userId = storage.get('userId')
@@ -55,6 +70,9 @@ export default {
       } ()
   },
 
+  /**
+   * 保存标签
+   */
   SWITCH_TYPE: (state, { type }) => {
     storage.get('currentType')
       ? state.currentType = storage.get('currentType')
@@ -64,6 +82,9 @@ export default {
       } ()
   },
 
+  /**
+   * 保存详情数据
+   */
   SET_ITEMDATA: (state, { data }) => {
     storage.get('itemData')
       ? state.itemData = storage.get('itemData')
@@ -73,6 +94,9 @@ export default {
       } ()
   },
 
+  /**
+   * 保存用户数据
+   */
   SET_USER: (state, { data }) => {
     storage.get('user')
       ? state.user = storage.get('user')
@@ -82,6 +106,9 @@ export default {
       } ()
   },
 
+  /**
+   * 移除用户数据
+   */
   REMOVE_USER: (state) => {
     storage.remove('user')
     storage.remove('authorization')
@@ -91,6 +118,9 @@ export default {
     state.userId = ''
   },
 
+  /**
+   * 保存真实播放地址
+   */
   SET_VIDEO_URL: (state, { data }) => {
     state.videoUrl = data
   },

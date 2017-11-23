@@ -1,6 +1,6 @@
 <template>
   <div class="list-view">
-    <div class="news-list-nav">
+    <div class="data-list-nav">
       <router-link v-if="page > 1" :to="`/${ currentType }/${ currentSort }/${ (page - 1) }`">&lt; 上一页</router-link>
       <a v-else class="disabled">&lt; 上一页</a>
       <span>{{ page }}/{{ maxPage }}</span>
@@ -8,7 +8,7 @@
       <a v-else class="disabled">下一页 &gt;</a>
     </div>
     <transition :name="transition">
-      <div class="news-list" :key="displayedPage" v-if="displayedPage > 0">
+      <div class="data-list" :key="displayedPage" v-if="displayedPage > 0">
         <transition-group tag="ul" name="item">
           <item v-for="(item, idx) in displayedItems" :key="idx" :item="item">
           </item>
@@ -82,7 +82,7 @@ export default {
         page: this.$route.params.page - 1,
         size: this.$store.state.itemsPerPage
       }
-      this.$store.dispatch('REQ_TOP_DATA', { type: this.type, currentType: this.currentType, model }).then(() => {
+      this.$store.dispatch('REQ_LIST_DATA', { type: this.type, currentType: this.currentType, model }).then(() => {
         if (this.page < 0 || this.page > this.maxPage) {
           this.$router.replace(`/${ currentType }/${ this.type }/1`)
           return
@@ -105,11 +105,11 @@ export default {
 .list-view
   padding-top 45px
 
-.news-list-nav, .news-list
+.data-list-nav, .data-list
   background-color #fff
   border-radius 2px
 
-.news-list-nav
+.data-list-nav
   padding 15px 30px
   position fixed
   text-align center
@@ -123,7 +123,7 @@ export default {
   .disabled
     color #ccc
 
-.news-list
+.data-list
   position absolute
   margin 30px 0
   width 100%
@@ -154,6 +154,6 @@ export default {
   transform translate(30px, 0)
 
 @media (max-width 600px)
-  .news-list
+  .data-list
     margin 10px 0
 </style>

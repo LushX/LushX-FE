@@ -2,7 +2,10 @@ import * as ajax from '../api'
 import url from '../api/url'
 
 export default {
-  REQ_TOP_DATA: ({ commit, dispatch }, { type, currentType, currentSort, model }) => {
+  /**
+   * 获取列表数据
+   */
+  REQ_LIST_DATA: ({ commit, dispatch }, { type, currentType, currentSort, model }) => {
     commit('SET_ACTIVE_TYPE', { type })
 
     switch (currentType) {
@@ -12,7 +15,7 @@ export default {
             url: url.TOP_MOVIE,
             data: model
           }).then(data => {
-            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
@@ -21,7 +24,7 @@ export default {
             url: url.NEW_MOVIE,
             data: model
           }).then(data => {
-            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
@@ -34,7 +37,7 @@ export default {
               url: url.TOP_ANIMATION,
               data: model
             }).then(data => {
-              commit('SET_TOP_LIST', { data, currentType })
+              commit('SET_LIST_DATA', { data, currentType })
               commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
             })
         }
@@ -43,7 +46,7 @@ export default {
             url: url.NEW_ANIMATION,
             data: model
           }).then(data => {
-            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
@@ -54,7 +57,7 @@ export default {
         return ajax.get({
             url: url.TOP_CAM
           }).then(data => {
-            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         break
@@ -66,7 +69,7 @@ export default {
               url: url.TOP_TV,
               data: model
             }).then(data => {
-              commit('SET_TOP_LIST', { data, currentType })
+              commit('SET_LIST_DATA', { data, currentType })
               commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
             })
         }
@@ -75,7 +78,7 @@ export default {
             url: url.NEW_TV,
             data: model
           }).then(data => {
-            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
@@ -88,7 +91,7 @@ export default {
             url: url.TOP_ARTICLE,
             data: model
           }).then(data => {
-            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
@@ -97,7 +100,7 @@ export default {
             url: url.NEW_ARTICLE,
             data: model
           }).then(data => {
-            commit('SET_TOP_LIST', { data, currentType })
+            commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
         }
@@ -109,6 +112,9 @@ export default {
     }
   },
 
+  /**
+   * 获取真实播放地址
+   */
   REQ_VIDEO_URL: ({ commit, dispatch }, { data }) => {
     return ajax.get({
       url: url.VIDEO_PLAY,
@@ -120,26 +126,44 @@ export default {
     })
   },
 
+  /**
+   * 保存用户Token
+   */
   SET_AUTHORIZATION: ({ commit, dispatch }, { data }) => {
     commit('SET_AUTHORIZATION', { data })
   },
 
+  /**
+   * 保存用户Id
+   */
   SET_USERID: ({ commit, dispatch }, { data }) => {
     commit('SET_USERID', { data })
   },
 
+  /**
+   * 保存用户数据
+   */
   SET_USER: ({ commit, dispatch }, { data }) => {
     commit('SET_USER', { data })
   },
 
+  /**
+   * 移除用户数据
+   */
   REMOVE_USER: ({ commit, dispatch }) => {
     commit('REMOVE_USER')
   },
 
+  /**
+   * 保存详情数据
+   */
   SET_ITEMDATA: ({ commit, dispatch }, { data }) => {
     commit('SET_ITEMDATA', { data })
   },
 
+  /**
+   * 获取用户数据
+   */
   REQ_USER_INFO: ({ commit, dispatch }, { authorization }) => {
     return ajax.get({
       url: url.USER_INFO,
@@ -149,6 +173,9 @@ export default {
     })
   },
 
+  /**
+   * 切换标签
+   */
   SWITCH_TYPE: ({ commit, dispatch }, { type }) => {
     commit('SWITCH_TYPE', { type })
   }

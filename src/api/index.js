@@ -9,7 +9,10 @@ const setAuthorization = (token) => {
   axios.defaults.headers['Authorization'] = token
 }
 
-// POST请求
+/**
+ * POST请求
+ * @param {Object} obj
+ */
 export const post = obj => {
   if(obj.data.authorization) {
     setAuthorization(obj.data.authorization)
@@ -24,7 +27,10 @@ export const post = obj => {
   })
 }
 
-// GET请求
+/**
+ * GET请求
+ * @param {Object} obj
+ */
 export const get = obj => {
   if(obj.authorization) {
     setAuthorization(obj.authorization)

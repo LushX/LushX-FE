@@ -1,5 +1,3 @@
-<!-- borrowed from Nuxt! -->
-
 <template>
   <div class="progress" :style="{
     'width': percent+'%',
