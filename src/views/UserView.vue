@@ -3,6 +3,7 @@
     <div class="user-view-header">
       <h1>
         <a>欢迎 <span>{{ user.username }}</span></a>
+        <a class="logout" @click="logout">退出登录</a>
       </h1>
     </div>
     <transition name="slide-fade">
@@ -107,10 +108,20 @@ export default {
   computed: {
     user () {
       return this.$store.state.user || {}
-    }
+    },
+
+    currentType () {
+      return this.$store.state.currentType
+    },
   },
 
   methods: {
+    logout () {
+      this.$store.dispatch('REMOVE_USER').then(() => {
+        this.$router.push({ path: `/${ this.currentType }/top/1` })
+      })
+    },
+
     validate (model, confirmPassword) {
       if (model.username.length) {
         if (!model.username.trim().length || model.username.length > 20) {
@@ -204,6 +215,13 @@ export default {
     font-size 1.5em
     margin 0
     margin-right .5em
+    .logout
+      float right
+      font-size .6em
+      font-weight 400
+      line-height 2.4em
+      color #828182
+      cursor pointer
     span
       color #59BBA5
 

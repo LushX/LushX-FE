@@ -82,6 +82,15 @@ export default {
       } ()
   },
 
+  REMOVE_USER: (state) => {
+    storage.remove('user')
+    storage.remove('authorization')
+    storage.remove('userId')
+    state.user = {}
+    state.authorization = ''
+    state.userId = ''
+  },
+
   SET_VIDEO_URL: (state, { data }) => {
     state.videoUrl = data
   },

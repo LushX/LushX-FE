@@ -132,6 +132,10 @@ export default {
     commit('SET_USER', { data })
   },
 
+  REMOVE_USER: ({ commit, dispatch }) => {
+    commit('REMOVE_USER')
+  },
+
   SET_ITEMDATA: ({ commit, dispatch }, { data }) => {
     commit('SET_ITEMDATA', { data })
   },
