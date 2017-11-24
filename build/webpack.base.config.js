@@ -71,6 +71,5 @@ module.exports = {
         }),
         new BundleAnalyzerPlugin()
       ]
-    : [
-        new FriendlyErrorsPlugin()      ]
+    : [ new FriendlyErrorsPlugin() ]
 }
