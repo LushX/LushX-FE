@@ -1,11 +1,6 @@
 <template>
   <li class="list-item">
-    <template v-if="currentType === 'article'">
-      <img class="article-poster" :src="item.image">
-    </template>
-    <template v-else>
-      <span class="score">{{ item.score }}</span>
-    </template>
+    <img class="poster" :src="item.image">
     <span class="title">
       <router-link
         :to="`/${ currentType }/${ currentSort }/detail/${ item.articleId || item.videoId }`">
@@ -17,7 +12,7 @@
       <span class="label">{{ item.time }}</span>
     </template>
     <template v-else-if="currentType === 'movie'">
-      <span class="label">{{ item.actor | actorLabel }}</span>
+      <span class="label">{{ item.type }}</span>
     </template>
     <template v-else-if="currentType === 'animation'">
       <span class="label">{{ item.type }}</span>
@@ -29,6 +24,8 @@
 </template>
 
 <script>
+import errorImg from '../../public/error.png'
+
 export default {
   name: 'list-item',
 
@@ -42,10 +39,16 @@ export default {
     currentSort () {
       return this.$route.fullPath.split('/')[2]
     }
+  },
 
-    // actors () {
-    //   return this.item.actor.split(' ').slice(0, 3)
-    // }
+  mounted () {
+    let allPostImg = Object.values(document.getElementsByClassName('poster'))
+    allPostImg.forEach(item => {
+      item.onerror = () => {
+        item.src = errorImg
+        item.alt = '图片来源错误'
+      }
+    })
   }
 }
 </script>
@@ -57,7 +60,7 @@ export default {
   border-bottom 1px solid #eee
   position relative
   line-height 20px
-  .article-poster
+  .poster
     position: absolute;
     left: 10px;
     width: 60px;

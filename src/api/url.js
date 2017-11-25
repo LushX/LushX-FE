@@ -5,12 +5,13 @@ export default {
   NEW_ANIMATION : '/video/cartoon/new',
   TOP_CAM       : '/movie/top',
   TOP_TV        : '/video/tv/hot',
-  NEW_TV        : '/video/tv/new',  
+  NEW_TV        : '/video/tv/new',
   TOP_ARTICLE   : '/article/hot',
   NEW_ARTICLE   : '/article/new',
   LOGIN         : '/login',
   REGISTER      : '/register',
   USER_INFO     : '/u',
   UPDATE_USER   : '/u',
-  VIDEO_PLAY    : '/api/video'
+  VIDEO_PLAY    : '/api/video',
+  DOUBAN_API    : 'http://api.douban.com/v2/movie/search'
 }

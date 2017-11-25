@@ -126,6 +126,17 @@ export default {
     })
   },
 
+  REQ_DOUBAN_DETAILS: ({ commit, dispatch }, { title }) => {
+    return ajax.getJsonp({
+      url: url.DOUBAN_API,
+      data: {
+        q: title
+      }
+    }).then(data => {
+      console.log(data)
+    })
+  },
+
   /**
    * 保存用户Token
    */

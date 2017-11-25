@@ -1,4 +1,6 @@
 import axios from 'axios'
+import jsonp from 'jsonp'
+import qs from 'qs'
 
 axios.defaults.timeout = 1000000 // 响应时间
 axios.defaults.headers['Content-Type'] = 'application/json' // 通信格式
@@ -41,6 +43,19 @@ export const get = obj => {
       resolve(data.data)
     }).catch(data => {
       reject(data.data)
+    })
+  })
+}
+
+/**
+ * JSONP请求
+ * @param {Object} obj
+ */
+export const getJsonp = obj => {
+  console.log(obj)
+  return new Promise((resolve,reject) => {
+    jsonp(obj.url + '?' + qs.stringify(obj.data), null,  (err, data) => {
+      resolve(data)
     })
   })
 }

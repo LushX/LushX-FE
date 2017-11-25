@@ -49,10 +49,6 @@ export default {
       }
     },
 
-    // actors () {
-    //   return this.video.actor.split(' ').slice(0, 4)
-    // },
-
     currentType () {
       return this.$store.state.currentType
     }
