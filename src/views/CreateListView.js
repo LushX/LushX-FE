@@ -9,7 +9,7 @@ export default function createListView (type) {
     asyncData ({ store, route }) {
       store.dispatch('SWITCH_TYPE', { type: route.fullPath.split('/')[1] })
 
-      const currentType = store.state.currentType
+      const currentType = route.fullPath.split('/')[1]
       const currentSort = route.fullPath.split('/')[2]
       const model = {
         page: route.params.page - 1,

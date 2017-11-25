@@ -7,14 +7,17 @@
       <span class="score">{{ item.score }}</span>
     </template>
     <span class="title">
-      <router-link :to="`/${ currentType }/${ currentSort }/detail/${ item.articleId || item.videoId }`">{{ item.title }}</router-link>
+      <router-link
+        :to="`/${ currentType }/${ currentSort }/detail/${ item.articleId || item.videoId }`">
+        {{ item.title }}
+      </router-link>
     </span>
     <br>
     <template v-if="currentType === 'article'">
-      <span class="label">{{ item.time | timeLabel }}</span>
+      <span class="label">{{ item.time }}</span>
     </template>
     <template v-else-if="currentType === 'movie'">
-      <span class="label">{{ item.actor }}</span>
+      <span class="label">{{ item.actor | actorLabel }}</span>
     </template>
     <template v-else-if="currentType === 'animation'">
       <span class="label">{{ item.type }}</span>
@@ -26,8 +29,6 @@
 </template>
 
 <script>
-import { timeLabel } from '../util/filters'
-
 export default {
   name: 'list-item',
 
@@ -41,6 +42,10 @@ export default {
     currentSort () {
       return this.$route.fullPath.split('/')[2]
     }
+
+    // actors () {
+    //   return this.item.actor.split(' ').slice(0, 3)
+    // }
   }
 }
 </script>

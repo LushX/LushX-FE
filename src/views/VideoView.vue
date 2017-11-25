@@ -15,12 +15,12 @@
               <h2>地区：<span class="label">{{ video.area }}</span></h2>
               <h2>年份：<span class="label">{{ video.time }}</span></h2>
               <h2>导演：<span class="label">{{ video.director }}</span></h2>
-              <h2>演员：<span class="label">{{ video.actor }}</span></h2>
+              <h2>演员：<span class="label">{{ video.actor | actorLabel }}</span></h2>
           </div>
         </div>
         <div class="video-details">
           <h1>简介</h1>
-          <p class="details-container">{{ video.other || '暂无简介' }}</p>
+          <p class="details-container">{{ video.other || '暂无简介' | cancelSpace}}</p>
         </div>
         <div class="video-play">
           <h1>立即播放</h1>
@@ -48,6 +48,10 @@ export default {
         return this.$store.state.itemData
       }
     },
+
+    // actors () {
+    //   return this.video.actor.split(' ').slice(0, 4)
+    // },
 
     currentType () {
       return this.$store.state.currentType
