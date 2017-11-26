@@ -133,7 +133,7 @@ export default {
         q: title
       }
     }).then(data => {
-      console.log(data)
+      commit('SET_DOUBAN', { data: data.subjects[0] })
     })
   },
 

@@ -95,6 +95,13 @@ export default {
   },
 
   /**
+   * 保存豆瓣数据
+   */
+  SET_DOUBAN: (state, { data }) => {
+    state.douban = data
+  },
+
+  /**
    * 保存用户数据
    */
   SET_USER: (state, { data }) => {

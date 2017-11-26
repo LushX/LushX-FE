@@ -1,21 +1,22 @@
 <template>
   <div class="video-view" v-if="video">
-    <template v-if="video">
+    <template v-if="douban">
       <div class="video-view-header">
         <h1>
           <a>{{ video.title }}</a>
         </h1><br>
-        <span class="label">{{ video.alias }}</span>
+        <span class="label">{{ douban ? douban.original_title : '' }}</span>
       </div>
       <div class="video-view-details">
         <div class="video-poster-wrapper">
-          <img class="video-poster" :src="video.image">
+          <img class="video-poster" :src="douban ? douban.images.medium : video.image">
           <div class="video-des-wrapper">
-              <h2>评分：<span class="label score">{{ video.score }}</span></h2>
+              <h2>评分：<span class="label score">{{ douban ? douban.rating.average : '暂无评分' }}</span></h2>
               <h2>地区：<span class="label">{{ video.area }}</span></h2>
-              <h2>年份：<span class="label">{{ video.time }}</span></h2>
-              <h2>导演：<span class="label">{{ video.director }}</span></h2>
-              <h2>演员：<span class="label">{{ video.actor | actorLabel }}</span></h2>
+              <h2>类型：<span v-for="(genre, idx) in douban.genres" :key="idx" class="label">{{ genre }} </span></h2>
+              <h2>年份：<span class="label">{{ douban.year }}</span></h2>
+              <h2>导演：<a v-for="(director, idx) in douban.directors" :key="idx" class="label click" :href="director.alt" target="_blank">{{ director.name }} </a></h2>
+              <h2>演员：<a v-for="(cast, idx) in douban.casts" :key="idx" class="label click" :href="cast.alt" target="_blank">{{ cast.name }} </a></h2>
           </div>
         </div>
         <div class="video-details">
@@ -27,16 +28,35 @@
           <a class="play-btn" :href="video.value" target="_blank">视频源址</a><br>
           <router-link class="play-btn" :to="`play/${ video.videoId }`">在线播放</router-link>
         </div>
+        <div class="video-copyright">
+          <p class="copyright">本页数据来源于<a :href="douban.alt" target="_blank">豆瓣</a></p>
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="loading">
+        <h2>数据加载中...</h2>
       </div>
     </template>
   </div>
 </template>
 
 <script>
+import Spinner from '../components/Spinner.vue'
 import storage from 'store'
 
 export default {
   name: 'video-view',
+
+  data () {
+    return {
+      douban: ''
+    }
+  },
+
+  components: {
+    Spinner
+  },
 
   computed: {
     video () {
@@ -62,14 +82,28 @@ export default {
     if(this.video.videoId) {
       storage.remove('itemData')
       this.$store.dispatch('SET_ITEMDATA', { data: this.video })
+      this.$store.dispatch('REQ_DOUBAN_DETAILS', { title: this.video.title }).then(() => {
+        this.douban = this.$store.state.douban
+      })
     } else {
       this.$store.dispatch('SET_ITEMDATA', { data: {} })
+      this.$store.dispatch('REQ_DOUBAN_DETAILS', { title: this.video.title }).then(() => {
+        this.douban = this.$store.state.douban
+      })
     }
   }
 }
 </script>
 
 <style lang="stylus">
+.video-view
+  .loading
+    margin-top 10em
+    text-align center
+    h2
+      color #828282
+      font-weight 400
+
 .video-view-header
   background-color #fff
   padding 1.8em 2em 1em
@@ -102,8 +136,10 @@ export default {
         font-weight 500
         .label
           color #828282
-        .score
+        .label.click
           color #59BBA5
+        .score
+          color #EFC14E
   .video-details
     margin-top 2em
     width 100%
@@ -118,6 +154,13 @@ export default {
     .play-btn
       line-height 2.4em
       color #59BBA5
+  .video-copyright
+    margin-top 2em
+    margin-bottom 2em
+    width 100%
+    .copyright
+      color #828282
+      font-size .8em
 
 @media (max-width 600px)
   .video-view-header

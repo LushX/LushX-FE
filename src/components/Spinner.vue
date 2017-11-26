@@ -33,7 +33,7 @@ $duration = 1.4s
     transform scale(0.5) rotate(270deg)
 
 .spinner .path
-  stroke #efc14e
+  stroke #EFC14E
   stroke-dasharray $offset
   stroke-dashoffset 0
   transform-origin center

@@ -13,6 +13,7 @@ export function createStore () {
       currentType   : 'movie',
       totalPage     : 1,
       itemData      : {},
+      douban        : {},
       videoUrl      : '',
       userId        : '',
       user          : {},

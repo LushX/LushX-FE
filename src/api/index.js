@@ -52,7 +52,6 @@ export const get = obj => {
  * @param {Object} obj
  */
 export const getJsonp = obj => {
-  console.log(obj)
   return new Promise((resolve,reject) => {
     jsonp(obj.url + '?' + qs.stringify(obj.data), null,  (err, data) => {
       resolve(data)
