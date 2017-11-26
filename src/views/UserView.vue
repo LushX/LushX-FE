@@ -58,19 +58,51 @@
     </div>
     <div class="user-view-details">
       <h2 class="user-option-title">
-        <a @click="openCollection = !openCollection">{{ openCollection ? '[-]' : '[+]' }}</a>
-        我的收藏
+        <a @click="openVideoCollection = !openVideoCollection">{{ openVideoCollection ? '[-]' : '[+]' }}</a>
+        视频收藏
       </h2>
-      <div v-show="openCollection">
-        <div class="user-view-item">
+      <div v-show="openVideoCollection">
+        <div v-if="!collection.video" class="user-view-item">
           <p>暂无收藏</p>
         </div>
+        <ul v-else class="collection-list">
+          <li v-for="(item, idx) in collection.video.content" :key="idx">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {{ item.title }}<br>
+            <a>
+              <span class="details" @click="showDetails(item, 'video')">查看</span>
+              <span class="delete">删除</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="user-view-details">
+      <h2 class="user-option-title">
+        <a @click="openArticleCollection = !openArticleCollection">{{ openArticleCollection ? '[-]' : '[+]' }}</a>
+        文章收藏
+      </h2>
+      <div v-show="openArticleCollection">
+        <div v-if="!collection.article" class="user-view-item">
+          <p>暂无收藏</p>
+        </div>
+        <ul v-else class="collection-list">
+          <li v-for="(item, idx) in collection.article.content" :key="idx">
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {{ item.title }}<br>
+            <a>
+              <span class="details" @click="showDetails(item, 'article')">查看</span>
+              <span class="delete">删除</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Item from '../components/Item.vue'
 import Spinner from '../components/Spinner.vue'
 import storage from 'store'
 import * as ajax from '../api'
@@ -87,13 +119,15 @@ export default {
         authorization: ''
       },
       openUserPanel: false,
-      openCollection: false,
+      openVideoCollection: false,
+      openArticleCollection: false,
       confirmPassword: '',
       loading: false,
       errorMsg: '',
       successMsg: '',
       showErrorMsg: false,
-      showSuccessMsg: false
+      showSuccessMsg: false,
+      collection: {}
     }
   },
 
@@ -102,7 +136,8 @@ export default {
   },
 
   components: {
-    Spinner
+    Spinner,
+    Item
   },
 
   computed: {
@@ -112,7 +147,7 @@ export default {
 
     currentType () {
       return this.$store.state.currentType
-    },
+    }
   },
 
   methods: {
@@ -185,11 +220,28 @@ export default {
         }).then(data => {
           data.status === 0
             ? this.saveUser(data)
-            : this.makeErrorMsg('修改失败')
+            : this.makeErrorMsg(data.msg)
           this.loading = !this.loading
         })
       } else {
         this.loading = !this.loading
+      }
+    },
+
+    showDetails (item, type) {
+      if(type === 'article') {
+        storage.remove('itemData')
+        this.$store.dispatch('SET_ITEMDATA', { data: item })
+        this.$router.push({
+          path: `/article/detail/${ item.articleId }`
+        })
+      }
+      if(type === 'video') {
+        storage.remove('itemData')
+        this.$store.dispatch('SET_ITEMDATA', { data: item })
+        this.$router.push({
+          path: `/video/detail/${ item.videoId }`
+        })
       }
     }
   },
@@ -197,9 +249,13 @@ export default {
   beforeMount () {
     if(this.$store.state.user) {
       storage.remove('user')
-      this.$store.dispatch('SET_USER', { data: this.user })
+      this.$store.dispatch('SET_USER', { data: this.user }).then(() => {
+        this.collection = this.$store.state.user.collection
+      })
     } else {
-      this.$store.dispatch('SET_USER', { data: null })
+      this.$store.dispatch('SET_USER', { data: null }).then(() => {
+        this.collection = this.$store.state.user.collection
+      })
     }
   }
 }
@@ -276,16 +332,23 @@ export default {
       color #59BBA5
       cursor pointer
 
-.slide-fade-enter-active
-  transition all .3s ease
-
-.slide-fade-leave-active
-  transition all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-
-.slide-fade-enter,
-.slide-fade-leave-to
-  transform translateX(10px)
-  opacity 0
+.collection-list
+  padding-left 1em
+  li
+    padding-top 1em
+    list-style none
+    a
+      padding-left .4em
+      line-height 2.5em
+      span
+        padding-left .9em
+        cursor pointer
+      .details
+        color #59BBA5
+      .delete
+        color #CC3300
+    i
+      color #EFC14E
 
 @media (max-width 600px)
   .user-view-header
@@ -294,4 +357,6 @@ export default {
   .user-view-details
     .user-option-title
       font-size 1em
+  .collection-list
+    padding-left .5em
 </style>

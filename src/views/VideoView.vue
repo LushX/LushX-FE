@@ -15,8 +15,14 @@
               <h2>地区：<span class="label">{{ video.area }}</span></h2>
               <h2>类型：<span v-for="(genre, idx) in douban.genres" :key="idx" class="label">{{ genre }} </span></h2>
               <h2>年份：<span class="label">{{ douban.year }}</span></h2>
-              <h2>导演：<a v-for="(director, idx) in douban.directors" :key="idx" class="label click" :href="director.alt" target="_blank">{{ director.name }} </a></h2>
-              <h2>演员：<a v-for="(cast, idx) in douban.casts" :key="idx" class="label click" :href="cast.alt" target="_blank">{{ cast.name }} </a></h2>
+              <h2>导演：
+                <span v-if="!douban.directors[0]" class="label">暂无</span>
+                <a v-for="(director, idx) in douban.directors" :key="idx" class="label click" :href="director.alt" target="_blank">{{ director.name }} </a>
+              </h2>
+              <h2>演员：
+                <span v-if="!douban.casts[0]" class="label">暂无</span>
+                <a v-for="(cast, idx) in douban.casts" :key="idx" class="label click" :href="cast.alt" target="_blank">{{ cast.name }} </a>
+              </h2>
           </div>
         </div>
         <div class="video-details">
