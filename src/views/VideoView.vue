@@ -28,15 +28,27 @@
       </div>
       <div class="video-view-details">
         <h2 class="video-view-title">
+          <a @click="openDetails = !openDetails">{{ openDetails ? '[-]' : '[+]' }}</a>
           简介
         </h2>
-        <p class="details-container">{{ video.other || '暂无简介' | cancelSpace}}</p>
+        <div v-show="openDetails">
+          <p class="details-container">{{ video.other || '暂无简介' | cancelSpace}}</p>
+        </div>
       </div>
       <div class="video-view-details">
         <h2 class="video-view-title">
-          立即播放
+          <a @click="openEpisodes = !openEpisodes">{{ openEpisodes ? '[-]' : '[+]' }}</a>
+          播放
+          <span class="page-btn">
+            <span @click="goPrev">上一页</span>
+            <span @click="goNext">下一页</span>
+          </span>
         </h2>
-        <router-link class="play-btn" :to="`play/${ video.videoId }`">在线播放</router-link>
+        <div v-show="openEpisodes">
+          <router-link v-for="(item, idx) in episodes[currentCount]" :key="idx" class="play-btn" :to="`play/${ item.episodeId }`">
+            {{ item.index === 0 ? `第 ${ idx + 1 } 集` : `第 ${ item.index } 集` }}
+          </router-link>
+        </div>
       </div>
       <div class="video-view-details">
         <div class="video-copyright">
@@ -55,13 +67,17 @@
 <script>
 import Spinner from '../components/Spinner.vue'
 import storage from 'store'
+import { chunk } from '../util/filters'
 
 export default {
   name: 'video-view',
 
   data () {
     return {
-      douban: ''
+      douban: '',
+      episodesCount: 0,
+      openEpisodes: true,
+      openDetails: true
     }
   },
 
@@ -80,8 +96,30 @@ export default {
       }
     },
 
+    episodes () {
+      return chunk(this.video.episodesByVideoId, 20)
+    },
+
     currentType () {
       return this.$store.state.currentType
+    },
+
+    currentCount () {
+      return this.episodesCount
+    }
+  },
+
+  methods: {
+    goPrev () {
+      if(this.episodesCount > 0) {
+        this.episodesCount --
+      }
+    },
+
+    goNext () {
+      if(this.episodesCount < (this.episodes.length - 1)) {
+        this.episodesCount ++
+      }
     }
   },
 
@@ -162,13 +200,22 @@ export default {
   padding 1em 2em
   margin-top 10px
   .play-btn
+    padding-top 1em
+    width 8em
     color #59BBA5
+    display inline-block
   .video-view-title
     font-size 1.2em
     a
       font-weight 400
       color #828182
       cursor pointer
+    .page-btn
+      float right
+      span
+        padding-left 2em
+        cursor pointer
+        font-size .5em
 
 @media (max-width 600px)
   .video-view-header
