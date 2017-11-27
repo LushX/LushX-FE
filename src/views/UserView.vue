@@ -337,6 +337,7 @@ export default {
   li
     padding-top 1em
     list-style none
+    cursor pointer
     i
       color #EFC14E
 
