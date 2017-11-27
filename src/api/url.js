@@ -26,6 +26,8 @@ export default {
   // 收藏
   CANCEL_COLLECT_ARTICLE : '/article/dislike/',
   CANCEL_COLLECT_VIDEO   : '/video/dislike/',
+  ARTICLE_COLLECT_LIST   : '/article/like',
+  VIDEO_COLLECT_LIST     : '/video/like',
   COLLECT_ARTICLE        : '/article/like',
   COLLECT_VIDEO          : '/video/like',
   ISLIKE_ARTICLE         : '/article/islike',

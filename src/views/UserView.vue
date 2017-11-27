@@ -66,13 +66,9 @@
           <p>暂无收藏</p>
         </div>
         <ul v-else class="collection-list">
-          <li v-for="(item, idx) in videoCollection.content" :key="idx">
+          <li v-for="(item, idx) in videoCollection.content" :key="idx" @click="showDetails(item, 'video')">
             <i class="fa fa-star" aria-hidden="true"></i>
-            {{ item.title }}<br>
-            <a>
-              <span class="details" @click="showDetails(item, 'video')">查看</span>
-              <span class="delete">删除</span>
-            </a>
+            {{ item.title }}
           </li>
         </ul>
       </div>
@@ -87,13 +83,9 @@
           <p>暂无收藏</p>
         </div>
         <ul v-else class="collection-list">
-          <li v-for="(item, idx) in articleCollection.content" :key="idx">
+          <li v-for="(item, idx) in articleCollection.content" :key="idx" @click="showDetails(item, 'article')">
             <i class="fa fa-star" aria-hidden="true"></i>
-            {{ item.title }}<br>
-            <a>
-              <span class="details" @click="showDetails(item, 'article')">查看</span>
-              <span class="delete">删除</span>
-            </a>
+            {{ item.title }}
           </li>
         </ul>
       </div>
@@ -345,16 +337,6 @@ export default {
   li
     padding-top 1em
     list-style none
-    a
-      padding-left .4em
-      line-height 2.5em
-      span
-        padding-left .9em
-        cursor pointer
-      .details
-        color #59BBA5
-      .delete
-        color #CC3300
     i
       color #EFC14E
 
