@@ -5,8 +5,32 @@
         <h1>
           <a>{{ video.title }}</a>
         </h1><br>
-        <span class="label">{{ douban ? douban.original_title : '' }}</span>
+        <span class="label">{{ douban ? douban.original_title : '' }}</span><br>
+        <span @click="collect" class="label collect">
+          <i class="fa fa-star" aria-hidden="true" :style="collected ? 'color:#EFC14E' : 'color:#828282'"></i>
+          {{ collected ? '已收藏' : '收藏'}}
+        </span>
       </div>
+      <transition name="slide-fade">
+        <div v-if="showErrorMsg" class="video-view-info video-view-error">
+          <h1>
+            <a>
+              <i class="fa fa-exclamation" aria-hidden="true"></i>
+              {{ errorMsg }}
+            </a>
+          </h1>
+        </div>
+      </transition>
+      <transition name="slide-fade">
+        <div v-if="showSuccessMsg" class="video-view-info video-view-success">
+          <h1>
+            <a>
+              <i class="fa fa-check-square-o" aria-hidden="true"></i>
+              {{ successMsg }}
+            </a>
+          </h1>
+        </div>
+      </transition>
       <div class="video-view-details">
         <div class="video-poster-wrapper">
           <img class="video-poster" :src="douban ? douban.images.medium : video.image">
@@ -77,7 +101,12 @@ export default {
       douban: '',
       episodesCount: 0,
       openEpisodes: true,
-      openDetails: true
+      openDetails: true,
+      collected: false,
+      errorMsg: '',
+      successMsg: '',
+      showErrorMsg: false,
+      showSuccessMsg: false
     }
   },
 
@@ -119,6 +148,34 @@ export default {
     goNext () {
       if(this.episodesCount < (this.episodes.length - 1)) {
         this.episodesCount ++
+      }
+    },
+
+    makeErrorMsg (errorMsg) {
+      this.errorMsg = errorMsg
+      this.showErrorMsg = !this.showErrorMsg
+      setTimeout(() => {
+        this.showErrorMsg = !this.showErrorMsg
+        this.errorMsg = ''
+      }, 1500)
+    },
+
+    makeSuccessMsg (successMsg) {
+      this.successMsg = successMsg
+      this.showSuccessMsg = !this.showSuccessMsg
+      setTimeout(() => {
+        this.showSuccessMsg = !this.showSuccessMsg
+        this.successMsg = ''
+      }, 1500)
+    },
+
+    collect () {
+      if (this.collected) {
+        this.collected = !this.collected
+        this.makeSuccessMsg('取消收藏成功')
+      } else {
+        this.collected = !this.collected
+        this.makeSuccessMsg('收藏成功')
       }
     }
   },
@@ -165,6 +222,27 @@ export default {
   .label
     line-height 2.5em
     color #828282
+
+.video-view-info
+  background-color #fff
+  margin-top 10px
+  padding 1.8em 2em
+  box-shadow 0 1px 2px rgba(0,0,0,.1)
+  h1
+    display inline
+    font-size 1em
+    margin 0
+    margin-right .5em
+
+.video-view-error
+  h1
+    a
+      color #CC3300
+
+.video-view-success
+  h1
+    a
+      color #59BBA5
 
 .video-view-details
   background-color #fff
@@ -216,6 +294,17 @@ export default {
       padding-left 2em
       cursor pointer
       font-size .9em
+
+.slide-fade-enter-active
+  transition all .3s ease
+
+.slide-fade-leave-active
+  transition all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+
+.slide-fade-enter,
+.slide-fade-leave-to
+  transform translateX(10px)
+  opacity 0
 
 @media (max-width 600px)
   .video-view-header
