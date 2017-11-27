@@ -39,7 +39,7 @@
         <h2 class="video-view-title">
           <a @click="openEpisodes = !openEpisodes">{{ openEpisodes ? '[-]' : '[+]' }}</a>
           播放
-          <span class="page-btn">
+          <span v-show="openEpisodes" class="page-btn">
             <span @click="goPrev">上一页</span>
             <span @click="goNext">下一页</span>
           </span>
@@ -212,10 +212,10 @@ export default {
       cursor pointer
     .page-btn
       float right
-      span
-        padding-left 2em
-        cursor pointer
-        font-size .5em
+    span
+      padding-left 2em
+      cursor pointer
+      font-size .9em
 
 @media (max-width 600px)
   .video-view-header
