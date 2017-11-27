@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import * as ajax from '../api'
+import url from '../api/url'
 import storage from 'store'
 
 export default {
@@ -68,7 +70,7 @@ export default {
           return item.articleId === this.$route.params.id
         })[0]
       } else {
-        return this.$store.state.itemData
+        return this.$store.state.itemData || {}
       }
     }
   },
@@ -77,10 +79,25 @@ export default {
     collect () {
       if (this.collected) {
         this.collected = !this.collected
-        this.makeSuccessMsg('取消收藏成功')
+        ajax.post({
+          url: url.CANCEL_COLLECT_ARTICLE + this.article.articleId,
+          authorization: this.$store.state.authorization
+        }).then(data => {
+          data.status === 0
+            ? this.makeSuccessMsg('取消收藏成功')
+            : this.makeErrorMsg('取消收藏失败')
+        })
       } else {
         this.collected = !this.collected
-        this.makeSuccessMsg('收藏成功')
+        ajax.post({
+          url: url.COLLECT_ARTICLE,
+          authorization: this.$store.state.authorization,
+          data: this.article
+        }).then(data => {
+          data.status === 0
+            ? this.makeSuccessMsg(data.msg)
+            : this.makeErrorMsg('收藏失败')
+        })
       }
     },
 
@@ -107,7 +124,18 @@ export default {
     return this.article.title || '文章'
   },
 
-  mounted () {
+  beforeMount () {
+    ajax.get({
+      url: url.ISLIKE_ARTICLE,
+      authorization: this.$store.state.authorization,
+      data: {
+        articleId: this.$route.params.id
+      }
+    }).then(data => {
+      data.status === 0
+        ? this.collected = data.data.isLike
+        : this.collected = false
+    })
     if(this.article.articleId) {
       storage.remove('itemData')
       this.$store.dispatch('SET_ITEMDATA', { data: this.article })

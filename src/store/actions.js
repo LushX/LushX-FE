@@ -138,6 +138,9 @@ export default {
     })
   },
 
+  /**
+   * 获取豆瓣详情
+   */
   REQ_DOUBAN_DETAILS: ({ commit, dispatch }, { title }) => {
     return ajax.getJsonp({
       url: url.DOUBAN_API,

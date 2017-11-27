@@ -16,8 +16,8 @@ const setAuthorization = (token) => {
  * @param {Object} obj
  */
 export const post = obj => {
-  if(obj.data.authorization) {
-    setAuthorization(obj.data.authorization)
+  if(obj.authorization) {
+    setAuthorization(obj.authorization)
   }
 
   return new Promise((resolve,reject) => {

@@ -106,11 +106,11 @@ export default {
    */
   SET_USER: (state, { data }) => {
     storage.get('user')
-      ? state.user = storage.get('user')
-      : !function () {
-        state.user = data
-        storage.set('user', data)
-      } ()
+    ? state.user = storage.get('user')
+    : !function () {
+      state.user = data
+      storage.set('user', data)
+    } ()
   },
 
   /**

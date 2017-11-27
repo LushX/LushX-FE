@@ -1,5 +1,5 @@
 <template>
-  <div class="user-view">
+  <div class="user-view" v-if="user">
     <div class="user-view-header">
       <h1>
         <a>欢迎 <span>{{ user.username }}</span></a>
@@ -62,11 +62,11 @@
         视频收藏
       </h2>
       <div v-show="openVideoCollection">
-        <div v-if="!collection.video" class="user-view-item">
+        <div v-if="!videoCollection.totalElements" class="user-view-item">
           <p>暂无收藏</p>
         </div>
         <ul v-else class="collection-list">
-          <li v-for="(item, idx) in collection.video.content" :key="idx">
+          <li v-for="(item, idx) in videoCollection.content" :key="idx">
             <i class="fa fa-star" aria-hidden="true"></i>
             {{ item.title }}<br>
             <a>
@@ -83,11 +83,11 @@
         文章收藏
       </h2>
       <div v-show="openArticleCollection">
-        <div v-if="!collection.article" class="user-view-item">
+        <div v-if="!articleCollection.totalElements" class="user-view-item">
           <p>暂无收藏</p>
         </div>
         <ul v-else class="collection-list">
-          <li v-for="(item, idx) in collection.article.content" :key="idx">
+          <li v-for="(item, idx) in articleCollection.content" :key="idx">
             <i class="fa fa-star" aria-hidden="true"></i>
             {{ item.title }}<br>
             <a>
@@ -116,9 +116,9 @@ export default {
       model: {
         username: '',
         password: '',
-        authorization: ''
       },
       openUserPanel: false,
+      authorization: '',
       openVideoCollection: false,
       openArticleCollection: false,
       confirmPassword: '',
@@ -127,7 +127,8 @@ export default {
       successMsg: '',
       showErrorMsg: false,
       showSuccessMsg: false,
-      collection: {}
+      videoCollection: {},
+      articleCollection: {}
     }
   },
 
@@ -212,10 +213,11 @@ export default {
 
     updateUser () {
       this.loading = !this.loading
-      this.model.authorization = this.$store.state.authorization
+      this.authorization = this.$store.state.authorization
       if(this.validate(this.model, this.confirmPassword)) {
         ajax.post({
           url: url.UPDATE_USER,
+          authorization: this.authorization,
           data: this.model
         }).then(data => {
           data.status === 0
@@ -246,18 +248,22 @@ export default {
     }
   },
 
+  mounted () {
+    storage.remove('user')
+    this.$store.dispatch('REQ_USER_INFO', { authorization: storage.get('authorization') }).then(() => {
+      this.videoCollection = this.$store.state.user.collection.video
+      this.articleCollection = this.$store.state.user.collection.article
+    })
+  },
+
   beforeMount () {
-    if(this.$store.state.user) {
+    if(this.user.userId) {
       storage.remove('user')
-      this.$store.dispatch('SET_USER', { data: this.user }).then(() => {
-        this.collection = this.$store.state.user.collection
-      })
+      this.$store.dispatch('SET_USER', { data: this.user })
     } else {
-      this.$store.dispatch('SET_USER', { data: null }).then(() => {
-        this.collection = this.$store.state.user.collection
-      })
+      this.$store.dispatch('SET_USER', { data: null })
     }
-  }
+  },
 }
 </script>
 
