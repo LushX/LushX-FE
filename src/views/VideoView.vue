@@ -25,15 +25,20 @@
               </h2>
           </div>
         </div>
-        <div class="video-details">
-          <h1>简介</h1>
-          <p class="details-container">{{ video.other || '暂无简介' | cancelSpace}}</p>
-        </div>
-        <div class="video-play">
-          <h1>立即播放</h1>
-          <a class="play-btn" :href="video.value" target="_blank">视频源址</a><br>
-          <router-link class="play-btn" :to="`play/${ video.videoId }`">在线播放</router-link>
-        </div>
+      </div>
+      <div class="video-view-details">
+        <h2 class="video-view-title">
+          简介
+        </h2>
+        <p class="details-container">{{ video.other || '暂无简介' | cancelSpace}}</p>
+      </div>
+      <div class="video-view-details">
+        <h2 class="video-view-title">
+          立即播放
+        </h2>
+        <router-link class="play-btn" :to="`play/${ video.videoId }`">在线播放</router-link>
+      </div>
+      <div class="video-view-details">
         <div class="video-copyright">
           <p class="copyright">本页数据来源于<a :href="douban.alt" target="_blank">豆瓣</a></p>
         </div>
@@ -125,8 +130,6 @@ export default {
 
 .video-view-details
   background-color #fff
-  margin-top 10px
-  padding 0 2em .5em
   .video-poster-wrapper
     padding .4em 0
     display inline-block
@@ -146,20 +149,7 @@ export default {
           color #59BBA5
         .score
           color #EFC14E
-  .video-details
-    margin-top 2em
-    width 100%
-    h1
-      font-size 1.4em
-  .video-play
-    margin-top 2em
-    margin-bottom 2em
-    width 100%
-    h1
-      font-size 1.4em
-    .play-btn
-      line-height 2.4em
-      color #59BBA5
+
   .video-copyright
     margin-top 2em
     margin-bottom 2em
@@ -168,11 +158,25 @@ export default {
       color #828282
       font-size .8em
 
+.video-view-details
+  padding 1em 2em
+  margin-top 10px
+  .play-btn
+    color #59BBA5
+  .video-view-title
+    font-size 1.2em
+    a
+      font-weight 400
+      color #828182
+      cursor pointer
+
 @media (max-width 600px)
   .video-view-header
     h1
       font-size 1.25em
   .video-view-details
+    .video-view-title
+      font-size 1em
     .video-poster-wrapper
       .video-poster
         width 10em
@@ -180,10 +184,4 @@ export default {
         width 100%
         h1
           font-size 1em
-    .video-details
-      h1
-        font-size 1.1em
-    .video-play
-      h1
-        font-size 1.1em
 </style>
