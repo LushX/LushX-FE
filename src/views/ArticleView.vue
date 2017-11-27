@@ -129,14 +129,6 @@ export default {
   },
 
   beforeMount () {
-    if(this.article.articleId) {
-      storage.remove('itemData')
-      this.$store.dispatch('SET_ITEMDATA', { data: this.article })
-      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')
-    } else {
-      this.$store.dispatch('SET_ITEMDATA', { data: {} })
-      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')
-    }
     ajax.get({
       url: url.ISLIKE_ARTICLE,
       authorization: this.$store.state.authorization,
@@ -148,6 +140,15 @@ export default {
         ? this.collected = data.data.isLike
         : this.collected = false
     })
+
+    if(this.article.articleId) {
+      storage.remove('itemData')
+      this.$store.dispatch('SET_ITEMDATA', { data: this.article })
+      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')
+    } else {
+      this.$store.dispatch('SET_ITEMDATA', { data: {} })
+      this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')
+    }
   }
 }
 </script>

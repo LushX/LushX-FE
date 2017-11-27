@@ -89,6 +89,8 @@
 </template>
 
 <script>
+import * as ajax from '../api'
+import url from '../api/url'
 import Spinner from '../components/Spinner.vue'
 import storage from 'store'
 import { chunk } from '../util/filters'
@@ -116,7 +118,7 @@ export default {
 
   computed: {
     video () {
-      if(this.$store.state.list[0]) {
+      if(this.$store.state.list[0] && this.currentType !== 'article') {
         return this.$store.state.list.filter(item => {
           return item.videoId === this.$route.params.id
         })[0]
@@ -172,19 +174,46 @@ export default {
     collect () {
       if (this.collected) {
         this.collected = !this.collected
-        this.makeSuccessMsg('取消收藏成功')
+        ajax.post({
+          url: url.CANCEL_COLLECT_VIDEO + this.video.videoId,
+          authorization: this.$store.state.authorization
+        }).then(data => {
+          data.status === 0
+            ? this.makeSuccessMsg('取消收藏成功')
+            : this.makeErrorMsg('取消收藏失败')
+        })
       } else {
         this.collected = !this.collected
-        this.makeSuccessMsg('收藏成功')
+        ajax.post({
+          url: url.COLLECT_VIDEO,
+          authorization: this.$store.state.authorization,
+          data: this.video
+        }).then(data => {
+          data.status === 0
+            ? this.makeSuccessMsg(data.msg)
+            : this.makeErrorMsg('收藏失败')
+        })
       }
     }
   },
 
   title () {
-    return this.video.title
+    return this.video.title || '视频详情'
   },
 
-  mounted () {
+  beforeMount () {
+    ajax.get({
+      url: url.ISLIKE_VIDEO,
+      authorization: this.$store.state.authorization,
+      data: {
+        videoId: this.$route.params.id
+      }
+    }).then(data => {
+      data.status === 0
+        ? this.collected = data.data.isLike
+        : this.collected = false
+    })
+
     if(this.video.videoId) {
       storage.remove('itemData')
       this.$store.dispatch('SET_ITEMDATA', { data: this.video })
