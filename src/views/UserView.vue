@@ -233,16 +233,18 @@ export default {
     showDetails (item, type) {
       if(type === 'article') {
         storage.remove('itemData')
-        this.$store.dispatch('SET_ITEMDATA', { data: item })
-        this.$router.push({
-          path: `/article/detail/${ item.articleId }`
+        this.$store.dispatch('SET_ITEMDATA', { data: item }).then(() => {
+          this.$router.push({
+            path: `/article/detail/${ item.articleId }`
+          })
         })
       }
       if(type === 'video') {
         storage.remove('itemData')
-        this.$store.dispatch('SET_ITEMDATA', { data: item })
-        this.$router.push({
-          path: `/video/detail/${ item.videoId }`
+        this.$store.dispatch('SET_ITEMDATA', { data: item }).then(() => {
+          this.$router.push({
+            path: `/video/detail/${ item.videoId }`
+          })
         })
       }
     }
