@@ -30,7 +30,7 @@ export default {
         break
 
       case 'cam':
-        // state.list = data.data.content
+        state.list = data.data.content
         break
 
       case 'tv':

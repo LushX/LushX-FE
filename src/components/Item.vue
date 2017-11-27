@@ -11,13 +11,7 @@
     <template v-if="currentType === 'article'">
       <span class="label">{{ item.time }}</span>
     </template>
-    <template v-else-if="currentType === 'movie'">
-      <span class="label">{{ item.type }}</span>
-    </template>
-    <template v-else-if="currentType === 'animation'">
-      <span class="label">{{ item.type }}</span>
-    </template>
-    <template v-else-if="currentType === 'tv'">
+    <template v-else>
       <span class="label">{{ item.type }}</span>
     </template>
   </li>

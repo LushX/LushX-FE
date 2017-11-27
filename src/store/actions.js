@@ -54,12 +54,24 @@ export default {
       }
 
       case 'cam': {
-        return ajax.get({
-            url: url.TOP_CAM
+        if (currentSort === 'top') {
+          return ajax.get({
+              url: url.TOP_CAM,
+              data: model
+            }).then(data => {
+              commit('SET_LIST_DATA', { data, currentType })
+              commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
+            })
+        }
+        if (currentSort === 'new') {
+          return ajax.get({
+            url: url.NEW_CAM,
+            data: model
           }).then(data => {
             commit('SET_LIST_DATA', { data, currentType })
             commit('SET_TOTAL_PAGE', { data: data.data.totalPages })
           })
+        }
         break
       }
 
