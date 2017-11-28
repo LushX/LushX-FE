@@ -21,7 +21,7 @@ export default {
   VIDEO_PLAY             : '/api/video',
 
   // 豆瓣
-  DOUBAN_API             : 'http://api.douban.com/v2/movie/search',
+  DOUBAN_API             : 'https://api.douban.com/v2/movie/search',
 
   // 收藏
   CANCEL_COLLECT_ARTICLE : '/article/dislike/',

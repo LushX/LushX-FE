@@ -60,13 +60,17 @@
       <h2 class="user-option-title">
         <a @click="openVideoCollection = !openVideoCollection">{{ openVideoCollection ? '[-]' : '[+]' }}</a>
         视频收藏
+        <span v-show="openVideoCollection" class="page-btn">
+          <span @click="goVideoPrev">上一页</span>
+          <span @click="goVideoNext">下一页</span>
+        </span>
       </h2>
       <div v-show="openVideoCollection">
         <div v-if="!videoCollection.totalElements" class="user-view-item">
           <p>暂无收藏</p>
         </div>
         <ul v-else class="collection-list">
-          <li v-for="(item, idx) in videoCollection.content" :key="idx" @click="showDetails(item, 'video')">
+          <li v-for="(item, idx) in videoCollectionEpisodes[currentVideoCount]" :key="idx" @click="showDetails(item, 'video')">
             <i class="fa fa-star" aria-hidden="true"></i>
             {{ item.title }}
           </li>
@@ -77,13 +81,17 @@
       <h2 class="user-option-title">
         <a @click="openArticleCollection = !openArticleCollection">{{ openArticleCollection ? '[-]' : '[+]' }}</a>
         文章收藏
+        <span v-show="openArticleCollection" class="page-btn">
+          <span @click="goArticlePrev">上一页</span>
+          <span @click="goArticleNext">下一页</span>
+        </span>
       </h2>
       <div v-show="openArticleCollection">
         <div v-if="!articleCollection.totalElements" class="user-view-item">
           <p>暂无收藏</p>
         </div>
         <ul v-else class="collection-list">
-          <li v-for="(item, idx) in articleCollection.content" :key="idx" @click="showDetails(item, 'article')">
+          <li v-for="(item, idx) in articleCollectionEpisodes[currentArticleCount]" :key="idx" @click="showDetails(item, 'article')">
             <i class="fa fa-star" aria-hidden="true"></i>
             {{ item.title }}
           </li>
@@ -99,6 +107,7 @@ import Spinner from '../components/Spinner.vue'
 import storage from 'store'
 import * as ajax from '../api'
 import url from '../api/url'
+import { chunk } from '../util/filters'
 
 export default {
   name: 'user-view',
@@ -120,7 +129,9 @@ export default {
       showErrorMsg: false,
       showSuccessMsg: false,
       videoCollection: {},
-      articleCollection: {}
+      articleCollection: {},
+      articleEpisodesCount: 0,
+      videoEpisodesCount: 0
     }
   },
 
@@ -140,6 +151,22 @@ export default {
 
     currentType () {
       return this.$store.state.currentType
+    },
+
+    videoCollectionEpisodes () {
+      return chunk(this.videoCollection.content, 5)
+    },
+
+    articleCollectionEpisodes () {
+      return chunk(this.articleCollection.content, 5)
+    },
+
+    currentVideoCount () {
+      return this.videoEpisodesCount
+    },
+
+    currentArticleCount () {
+      return this.articleEpisodesCount
     }
   },
 
@@ -239,6 +266,30 @@ export default {
           })
         })
       }
+    },
+
+    goVideoPrev () {
+      if(this.videoEpisodesCount > 0) {
+        this.videoEpisodesCount --
+      }
+    },
+
+    goVideoNext () {
+      if(this.videoEpisodesCount < (this.videoCollectionEpisodes.length - 1)) {
+        this.videoEpisodesCount ++
+      }
+    },
+
+    goArticlePrev () {
+      if(this.articleEpisodesCount > 0) {
+        this.articleEpisodesCount --
+      }
+    },
+
+    goArticleNext () {
+      if(this.articleEpisodesCount < (this.articleCollectionEpisodes.length - 1)) {
+        this.articleEpisodesCount ++
+      }
     }
   },
 
@@ -312,6 +363,12 @@ export default {
       font-weight 400
       color #828182
       cursor pointer
+    .page-btn
+      float right
+    span
+      padding-left 2em
+      cursor pointer
+      font-size .9em
   .user-view-item
     padding 1.5em 1em
     p

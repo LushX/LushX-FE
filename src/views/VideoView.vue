@@ -70,7 +70,7 @@
         </h2>
         <div v-show="openEpisodes">
           <router-link v-for="(item, idx) in episodes[currentCount]" :key="idx" class="play-btn" :to="`play/${ item.episodeId }`">
-            {{ item.index === 0 ? `第 ${ idx + 1 } 集` : `第 ${ item.index } 集` }}
+            {{ item.indexs === 0 ? `第 ${ idx + 1 } 集` : `第 ${ item.indexs } 集` }}
           </router-link>
         </div>
       </div>
@@ -119,16 +119,21 @@ export default {
   computed: {
     video () {
       if(this.$store.state.list[0] && this.currentType !== 'article') {
-        return this.$store.state.list.filter(item => {
+        let e = this.$store.state.list.filter(item => {
           return item.videoId === this.$route.params.id
         })[0]
+        if (!e) {
+          return this.$store.state.itemData || {}
+        } else {
+          return e
+        }
       } else {
         return this.$store.state.itemData
       }
     },
 
     episodes () {
-      return chunk(this.video.episodesByVideoId, 20)
+      return chunk(this.video.episodes, 20)
     },
 
     currentType () {
@@ -178,20 +183,29 @@ export default {
           url: url.CANCEL_COLLECT_VIDEO + this.video.videoId,
           authorization: this.$store.state.authorization
         }).then(data => {
-          data.status === 0
-            ? this.makeSuccessMsg('取消收藏成功')
-            : this.makeErrorMsg('取消收藏失败')
+          if (data.status === 0) {
+            this.makeSuccessMsg('取消收藏成功')
+            this.collected = !this.collected
+          } else if (data.status === 1) {
+            this.makeErrorMsg('请先登录')
+          } else {
+            this.makeErrorMsg('网络错误')
+          }
         })
       } else {
-        this.collected = !this.collected
         ajax.post({
           url: url.COLLECT_VIDEO,
           authorization: this.$store.state.authorization,
           data: this.video
         }).then(data => {
-          data.status === 0
-            ? this.makeSuccessMsg(data.msg)
-            : this.makeErrorMsg('收藏失败')
+          if (data.status === 0) {
+            this.makeSuccessMsg(data.msg)
+            this.collected = !this.collected
+          } else if (data.status === 1) {
+            this.makeErrorMsg('请先登录')
+          } else {
+            this.makeErrorMsg('网络错误')
+          }
         })
       }
     }
