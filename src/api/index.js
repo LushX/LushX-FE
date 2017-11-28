@@ -4,8 +4,8 @@ import qs from 'qs'
 
 axios.defaults.timeout = 1000000 // 响应时间
 axios.defaults.headers['Content-Type'] = 'application/json' // 通信格式
-axios.defaults.baseURL = 'http://139.224.135.245:8080/lushx' // 开发环境接口地址
-// axios.defaults.baseURL = '' // 生产环境接口地址
+// axios.defaults.baseURL = 'http://139.224.135.245:8080/lushx' // 开发环境接口地址
+axios.defaults.baseURL = 'https://api.lushx.top/lushx' // 生产环境接口地址
 
 const setAuthorization = (token) => {
   axios.defaults.headers['Authorization'] = token
