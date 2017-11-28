@@ -1,0 +1,88 @@
+.video-view
+  .loading
+    margin-top 10em
+    text-align center
+    h2
+      color #828282
+      font-weight 400
+
+.video-view-header
+  background-color #fff
+  padding 1.8em 2em 1em
+  box-shadow 0 1px 2px rgba(0,0,0,.1)
+  h1
+    display inline
+    font-size 1.5em
+    margin 0
+    margin-right .5em
+  .label
+    line-height 2.5em
+    color #828282
+  .label.collect
+    cursor pointer
+
+.video-view-details
+  background-color #fff
+  .video-poster-wrapper
+    padding .4em 0
+    display inline-block
+    width 100%
+    .video-poster
+      display inline
+      width 10em
+    .video-des-wrapper
+      float left
+      width 50%
+      h2
+        font-size 1.2em
+        font-weight 500
+        .label
+          color #828282
+        .label.click
+          color #59BBA5
+        .score
+          color #EFC14E
+
+  .video-copyright
+    margin-top 2em
+    margin-bottom 2em
+    width 100%
+    .copyright
+      color #828282
+      font-size .8em
+
+.video-view-details
+  padding 1em 2em
+  margin-top 10px
+  .play-btn
+    padding-top 1em
+    width 8em
+    color #59BBA5
+    display inline-block
+  .video-view-title
+    font-size 1.2em
+    a
+      font-weight 400
+      color #828182
+      cursor pointer
+    .page-btn
+      float right
+    span
+      padding-left 2em
+      cursor pointer
+      font-size .9em
+
+@media (max-width 600px)
+  .video-view-header
+    h1
+      font-size 1.25em
+  .video-view-details
+    .video-view-title
+      font-size 1em
+    .video-poster-wrapper
+      .video-poster
+        width 10em
+      .video-des-wrapper
+        width 100%
+        h1
+          font-size 1em

@@ -1,3 +1,7 @@
+<style lang="stylus">
+  @import './ArticleView.styl'
+</style>
+
 <template>
   <div class="article-view" v-if="article">
     <template v-if="article">
@@ -141,46 +145,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-.article-view-header
-  background-color #fff
-  padding 1.8em 2em 1em
-  box-shadow 0 1px 2px rgba(0,0,0,.1)
-  h1
-    display inline
-    font-size 1.5em
-    margin 0
-    margin-right .5em
-  .label
-    line-height 2.5em
-    color #828282
-  .label.collect
-    float right
-    cursor pointer
-
-.article-view-details
-  background-color #fff
-  margin-top 10px
-  padding 0 2em .5em
-  .article-content
-    padding 2em .5em
-    .image-package
-      text-align center
-      .image-container
-        display inline-block
-      img
-        width 100%
-    a
-      color #828282
-      &:hover
-        color #59BBA5
-
-@media (max-width 600px)
-  .article-view-header
-    h1
-      font-size 1.25em
-  .article-view-details
-    .article-content
-      padding 2em 0
-</style>

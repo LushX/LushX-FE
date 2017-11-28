@@ -1,3 +1,7 @@
+<style lang="stylus">
+  @import './ErrorView.styl'
+</style>
+
 <template>
   <div class="error-view">
     <h1>{{ code }}</h1>
@@ -26,24 +30,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-.error-view
-  margin 30px auto
-  padding 20px 30px 20px 80px
-  background-color #fff
-  box-sizing border-box
-  h1
-    margin 0
-    font-size 3em
-  .msg
-    list-style-type none
-    padding 0
-    line-height 2em
-  a
-    color #59BBA5
-
-@media (max-width 600px)
-  .error-view
-    padding 20px 30px 20px 30px
-</style>

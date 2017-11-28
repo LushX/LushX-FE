@@ -1,3 +1,7 @@
+<style lang="stylus">
+  @import './AboutView.styl'
+</style>
+
 <template>
   <div class="about-view">
     <div class="about-view-header">
@@ -51,37 +55,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-.about-view-header
-  background-color #fff
-  padding 1.8em 2em 1em
-  box-shadow 0 1px 2px rgba(0,0,0,.1)
-  h1
-    display inline
-    font-size 1.5em
-    margin 0
-    margin-right .5em
-
-.about-view-details
-  background-color #fff
-  padding 1em 2em
-  margin-top 10px
-  .about-view-title
-    font-size 1.2em
-    a
-      font-weight 400
-      color #828182
-      cursor pointer
-  .about-link
-    line-height 2em
-    color #59BBA5
-
-@media (max-width 600px)
-  .about-view-header
-    h1
-      font-size 1.25em
-  .about-view-details
-    .about-view-title
-      font-size 1em
-</style>

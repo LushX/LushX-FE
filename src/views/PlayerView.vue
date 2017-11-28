@@ -1,3 +1,7 @@
+<style lang="stylus">
+  @import './PlayerView.styl'
+</style>
+
 <template>
   <div class="player-view">
     <div class="player-view-header">
@@ -77,54 +81,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-.player-view-header
-  background-color #fff
-  padding 1.8em 2em 1em
-  box-shadow 0 1px 2px rgba(0,0,0,.1)
-  h1
-    display inline
-    font-size 1.5em
-    margin 0
-    margin-right .5em
-    span
-      color #59BBA5
-
-.player-view-details
-  background-color #fff
-  padding 1em 2em
-  margin-top 10px
-  .video-container
-    width 100%
-    .video
-      width 100%
-
-.video-js
-  :focus
-      outline: 0
-
-.video-js .vjs-big-play-button
-    top 50%
-    left 50%
-    transform translate(-50%, -50%)
-
-
-.video-js
-    width 100%
-    height 30em
-
-@media (max-width 600px)
-  .player-view-header
-    h1
-      font-size 1.25em
-  .player-view-details
-    padding 1em 1em
-    .video-container
-      width 100%
-      .video
-        width 100%
-  .video-js
-    width 100%
-    height 16em
-</style>
