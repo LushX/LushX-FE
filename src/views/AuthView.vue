@@ -5,16 +5,7 @@
         <a>{{ authTitle }}</a>
       </h1>
     </div>
-    <transition name="slide-fade">
-      <div v-if="showErrorMsg" class="auth-view-error">
-        <h1>
-          <a>
-            <i class="fa fa-exclamation" aria-hidden="true"></i>
-            {{ errorMsg }}
-          </a>
-        </h1>
-      </div>
-    </transition>
+    <info :show="showInfo" :type="infoType" :msg="infoMsg"></info>
     <div class="auth-view-details">
       <div class="auth-view-item">
         <label for="用户名">
@@ -45,6 +36,7 @@
 
 <script>
 import storage from 'store'
+import Info from '../components/Info.vue'
 import Spinner from '../components/Spinner.vue'
 import * as ajax from '../api'
 import url from '../api/url'
@@ -63,8 +55,9 @@ export default {
         password: '',
       },
       confirmPassword: '',
-      errorMsg: '',
-      showErrorMsg: false,
+      showInfo: false,
+      infoType: '',
+      infoMsg: '',
       loading: false
     }
   },
@@ -74,7 +67,8 @@ export default {
   },
 
   components: {
-    Spinner
+    Spinner,
+    Info
   },
 
   computed: {
@@ -88,14 +82,14 @@ export default {
   methods: {
     validate (model, confirmPassword) {
         if (!model.username.trim().length || model.username.length > 20) {
-          this.makeErrorMsg('请输入有效用户名')
+          this.makeInfo('请输入有效用户名', 'error')
           return false
         } else if (!model.password.trim().length || model.password.length > 20) {
-          this.makeErrorMsg('请输入有效密码')
+          this.makeInfo('请输入有效密码', 'error')
           return false
         } else if (confirmPassword) {
           if (model.password !== confirmPassword) {
-            this.makeErrorMsg('两次密码不一致')
+            this.makeInfo('两次密码不一致', 'error')
             return false
           } else {
             return true
@@ -105,12 +99,12 @@ export default {
         }
     },
 
-    makeErrorMsg (errorMsg) {
-      this.errorMsg = errorMsg
-      this.showErrorMsg = !this.showErrorMsg
+    makeInfo (msg, type) {
+      this.infoType = type
+      this.infoMsg = msg
+      this.showInfo = !this.showInfo
       setTimeout(() => {
-        this.showErrorMsg = !this.showErrorMsg
-        this.errorMsg = ''
+        this.showInfo = !this.showInfo
       }, 1500)
     },
 
@@ -131,7 +125,7 @@ export default {
             this.loading = !this.loading
             data.status === 0
               ? this.saveUser(data)
-              : this.makeErrorMsg(data.msg)
+              : this.makeInfo(data.msg, 'error')
           })
         }
       } else {
@@ -144,7 +138,7 @@ export default {
             this.loading = !this.loading
             data.status === 0
               ? this.$router.push({ path: '/auth/login' })
-              : this.makeErrorMsg(data.msg)
+              : this.makeInfo(data.msg, 'error')
           })
         }
       }
@@ -172,19 +166,6 @@ export default {
     margin 0
     margin-right .5em
 
-.auth-view-error
-  background-color #fff
-  margin-top 10px
-  padding 1.8em 2em
-  box-shadow 0 1px 2px rgba(0,0,0,.1)
-  h1
-    display inline
-    font-size 1em
-    margin 0
-    margin-right .5em
-    a
-      color #CC3300
-
 .auth-view-details
   background-color #fff
   margin-top 10px
@@ -210,17 +191,6 @@ export default {
       color #59BBA5
     .auth-default
       color #38485C
-
-.slide-fade-enter-active
-  transition all .3s ease
-
-.slide-fade-leave-active
-  transition all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-
-.slide-fade-enter,
-.slide-fade-leave-to
-  transform translateX(10px)
-  opacity 0
 
 @media (max-width 600px)
   .auth-view-header

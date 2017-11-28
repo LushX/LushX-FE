@@ -6,26 +6,7 @@
         <a class="logout" @click="logout">退出登录</a>
       </h1>
     </div>
-    <transition name="slide-fade">
-      <div v-if="showErrorMsg" class="user-view-info user-view-error">
-        <h1>
-          <a>
-            <i class="fa fa-exclamation" aria-hidden="true"></i>
-            {{ errorMsg }}
-          </a>
-        </h1>
-      </div>
-    </transition>
-    <transition name="slide-fade">
-      <div v-if="showSuccessMsg" class="user-view-info user-view-success">
-        <h1>
-          <a>
-            <i class="fa fa-check-square-o" aria-hidden="true"></i>
-            {{ successMsg }}
-          </a>
-        </h1>
-      </div>
-    </transition>
+    <info :show="showInfo" :msg="infoMsg" :type="infoType"></info>
     <div class="user-view-details">
       <h2 class="user-option-title">
         <a @click="openUserPanel = !openUserPanel">{{ openUserPanel ? '[-]' : '[+]' }}</a>
@@ -102,6 +83,7 @@
 </template>
 
 <script>
+import Info from '../components/Info.vue'
 import Item from '../components/Item.vue'
 import Spinner from '../components/Spinner.vue'
 import storage from 'store'
@@ -124,10 +106,9 @@ export default {
       openArticleCollection: false,
       confirmPassword: '',
       loading: false,
-      errorMsg: '',
-      successMsg: '',
-      showErrorMsg: false,
-      showSuccessMsg: false,
+      showInfo: false,
+      infoType: '',
+      infoMsg: '',
       videoCollection: {},
       articleCollection: {},
       articleEpisodesCount: 0,
@@ -141,7 +122,8 @@ export default {
 
   components: {
     Spinner,
-    Item
+    Item,
+    Info
   },
 
   computed: {
@@ -180,44 +162,35 @@ export default {
     validate (model, confirmPassword) {
       if (model.username.length) {
         if (!model.username.trim().length || model.username.length > 20) {
-          this.makeErrorMsg('请输入有效用户名')
+          this.makeInfo('请输入有效用户名', 'error')
           return false
         } else {
           return true
         }
       } else if (confirmPassword || model.password) {
         if (!model.password.trim().length || model.password.length > 20) {
-          this.makeErrorMsg('请输入有效密码')
+          this.makeInfo('请输入有效密码', 'error')
           return false
         } else if (model.password !== confirmPassword) {
-          this.makeErrorMsg('两次密码不一致')
+          this.makeInfo('两次密码不一致', 'error')
           return false
         } else {
           return true
         }
       } else if (!model.username.length && !confirmPassword && !model.password) {
-        this.makeErrorMsg('请输入修改内容')
+        this.makeInfo('请输入修改内容', 'error')
         return false
       } else {
         return true
       }
     },
 
-    makeErrorMsg (errorMsg) {
-      this.errorMsg = errorMsg
-      this.showErrorMsg = !this.showErrorMsg
+    makeInfo (msg, type) {
+      this.infoType = type
+      this.infoMsg = msg
+      this.showInfo = !this.showInfo
       setTimeout(() => {
-        this.showErrorMsg = !this.showErrorMsg
-        this.errorMsg = ''
-      }, 1500)
-    },
-
-    makeSuccessMsg (successMsg) {
-      this.successMsg = successMsg
-      this.showSuccessMsg = !this.showSuccessMsg
-      setTimeout(() => {
-        this.showSuccessMsg = !this.showSuccessMsg
-        this.successMsg = ''
+        this.showInfo = !this.showInfo
       }, 1500)
     },
 
@@ -227,7 +200,7 @@ export default {
       this.$store.dispatch('SET_AUTHORIZATION', { data: data.data.Authorization })
       this.$store.dispatch('SET_USERID', { data: data.data.info.userId })
       this.$store.dispatch('SET_USER', { data: data.data.info })
-      this.makeSuccessMsg('修改成功')
+      this.makeInfo('修改成功', 'success')
     },
 
     updateUser () {
@@ -241,7 +214,7 @@ export default {
         }).then(data => {
           data.status === 0
             ? this.saveUser(data)
-            : this.makeErrorMsg(data.msg)
+            : this.makeInfo(data.msg, 'error')
           this.loading = !this.loading
         })
       } else {
@@ -332,27 +305,6 @@ export default {
     span
       color #59BBA5
 
-.user-view-info
-  background-color #fff
-  margin-top 10px
-  padding 1.8em 2em
-  box-shadow 0 1px 2px rgba(0,0,0,.1)
-  h1
-    display inline
-    font-size 1em
-    margin 0
-    margin-right .5em
-
-.user-view-error
-  h1
-    a
-      color #CC3300
-
-.user-view-success
-  h1
-    a
-      color #59BBA5
-
 .user-view-details
   background-color #fff
   padding 1em 2em
@@ -397,17 +349,6 @@ export default {
     cursor pointer
     i
       color #EFC14E
-
-.slide-fade-enter-active
-  transition all .3s ease
-
-.slide-fade-leave-active
-  transition all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-
-.slide-fade-enter,
-.slide-fade-leave-to
-  transform translateX(10px)
-  opacity 0
 
 @media (max-width 600px)
   .user-view-header

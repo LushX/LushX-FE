@@ -7,7 +7,7 @@
         </router-link>
         <router-link :to="`/${ currentType }/top/1`">最热</router-link>
         <router-link :to="`/${ currentType }/new/1`">最新</router-link>
-        <router-link to="/search">搜索</router-link>
+        <router-link v-show="currentType !== 'article'" to="/search">搜索</router-link>
         <router-link to="/type">分类</router-link>
         <a class="login" @click="userHandle">{{ auth ? '个人中心' : '登录' }}</a>
       </nav>
@@ -28,6 +28,7 @@ export default {
     auth () {
       return this.$store.state.authorization || ''
     },
+
     currentType () {
       return this.$store.state.currentType
     }

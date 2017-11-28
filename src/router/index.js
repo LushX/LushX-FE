@@ -8,6 +8,7 @@ const createPlayerView =   type => () => import('../views/CreatePlayerView').the
 const createListView   =   type => () => import('../views/CreateListView').then(m => m.default(type))
 const createUserView   =   type => () => import('../views/CreateUserView').then(m => m.default(type))
 const ArticleView      =           () => import('../views/ArticleView.vue')
+const SearchView       =           () => import('../views/SearchView.vue')
 const AboutView        =           () => import('../views/AboutView.vue')
 const VideoView        =           () => import('../views/VideoView.vue')
 const ErrorView        =           () => import('../views/ErrorView.vue')
@@ -33,6 +34,7 @@ export function createRouter () {
       { path: '/tv/:sort/detail/:id',         component: VideoView },
       { path: '/error/:code',                 component: ErrorView },
       { path: '/auth/:type',                  component: AuthView },
+      { path: '/search',                      component: SearchView },
       { path: '/about',                       component: AboutView },
       { path: '/type',                        component: TypeView },
       { path: '/',                            redirect: '/type' }
