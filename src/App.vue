@@ -56,6 +56,30 @@ export default {
     this.$store.dispatch('SET_AUTHORIZATION', { data: '' })
 
     this.$store.dispatch('SWITCH_TYPE', { type: 'movie' })
+  },
+
+  beforeMount () {
+    console.log(`
+        ██╗     ██╗   ██╗███████╗██╗  ██╗██╗  ██╗
+        ██║     ██║   ██║██╔════╝██║  ██║╚██╗██╔╝
+        ██║     ██║   ██║███████╗███████║ ╚███╔╝
+        ██║     ██║   ██║╚════██║██╔══██║ ██╔██╗
+        ███████╗╚██████╔╝███████║██║  ██║██╔╝ ██╗
+        ╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
+    `)
+    console.log('%c👥 代码贡献', 'font-size:15px')
+    console.log('%c    Xu ZhenYa https://github.com/zhenyaxu', 'font-size:12px')
+    console.log('%c    Trevor    https://huangxizhou.com', 'font-size:12px')
+    console.log('%c    Drohe     https://github.com/Drohe', 'font-size:12px')
+    console.log('%c    NULL      https://github.com/BENULL', 'font-size:12px')
+    console.log('%c✉️ 联系我们', 'font-size:15px')
+    console.log('%c    ltobenull@gmail.com', 'font-size:12px')
+    console.log('%c🌏 源码地址', 'font-size:15px')
+    console.log('%c    https://github.com/LushX', 'font-size:12px')
+    console.log('%c⚙️ 问题反馈', 'font-size:15px')
+    console.log('%c    https://github.com/LushX/LushX-FE/issues | 前端', 'font-size:12px')
+    console.log('%c    https://github.com/LushX/LushX-BE/issues | 后端', 'font-size:12px')
+    console.log("\n%c感谢您使用 LushX","color:yellow;font-weight:bold;")
   }
 }
 </script>
