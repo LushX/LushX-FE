@@ -48,7 +48,7 @@
         <h2 class="video-view-title">
           <a @click="openEpisodes = !openEpisodes">{{ openEpisodes ? '[-]' : '[+]' }}</a>
           播放
-          <span v-show="openEpisodes" class="page-btn">
+          <span v-show="openEpisodes && episodes.length > 1" class="page-btn">
             <span @click="goPrev">上一页</span>
             <span @click="goNext">下一页</span>
           </span>

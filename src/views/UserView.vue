@@ -45,7 +45,7 @@
       <h2 class="user-option-title">
         <a @click="openVideoCollection = !openVideoCollection">{{ openVideoCollection ? '[-]' : '[+]' }}</a>
         视频收藏
-        <span v-show="openVideoCollection" class="page-btn">
+        <span v-show="openVideoCollection && videoCollection.totalElements > 5" class="page-btn">
           <span @click="goVideoPrev">上一页</span>
           <span @click="goVideoNext">下一页</span>
         </span>
@@ -66,7 +66,7 @@
       <h2 class="user-option-title">
         <a @click="openArticleCollection = !openArticleCollection">{{ openArticleCollection ? '[-]' : '[+]' }}</a>
         文章收藏
-        <span v-show="openArticleCollection" class="page-btn">
+        <span v-show="openArticleCollection && articleCollection.totalElements > 5" class="page-btn">
           <span @click="goArticlePrev">上一页</span>
           <span @click="goArticleNext">下一页</span>
         </span>
