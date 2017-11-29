@@ -4,7 +4,7 @@
 
 <template>
   <li class="list-item">
-    <img class="poster" :src="item.image">
+    <img class="poster" :src="`http:${ item.image }`">
     <span class="title">
       <router-link
         :to="`/${ currentType }/${ currentSort }/detail/${ item.articleId || item.videoId }`">
