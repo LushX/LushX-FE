@@ -12,7 +12,7 @@
     <info :show="showInfo" :type="infoType" :msg="infoMsg"></info>
     <div class="search-view-details">
       <div class="search-view-item">
-        <input type="text" placeholder="请输入视频名称">
+        <input v-model="keyword" type="text" placeholder="请输入视频名称">
         <button @click="search" :disabled="loading">
           <i v-show="!loading" class="fa fa-search" aria-hidden="true"></i>
           <spinner :show="loading"></spinner>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import * as ajax from '../api'
+import url from '../api/url'
 import Info from '../components/Info.vue'
 import Spinner from '../components/Spinner.vue'
 
@@ -34,7 +36,8 @@ export default {
       loading: false,
       showInfo: false,
       infoType: '',
-      infoMsg: ''
+      infoMsg: '',
+      keyword: ''
     }
   },
 
@@ -44,15 +47,28 @@ export default {
   },
 
   methods: {
-    search () {
-      this.showInfo = true
-      this.infoType = 'success'
-      this.infoMsg = 'hhhh'
-      this.loading = !this.loading
+    makeInfo (msg, type) {
+      this.infoType = type
+      this.infoMsg = msg
+      this.showInfo = !this.showInfo
       setTimeout(() => {
-        this.showInfo = false
+        this.showInfo = !this.showInfo
+      }, 1500)
+    },
+
+    search () {
+      this.loading = !this.loading
+      ajax.get({
+        url: url.VIDEO_SEARCH,
+        data: {
+          keyword: this.keyword
+        }
+      }).then(data => {
+        data.status === 0
+          ? console.log(data)
+          : this.makeInfo(data.msg, 'error')
         this.loading = !this.loading
-      }, 3000)
+      })
     }
   },
 

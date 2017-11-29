@@ -11,6 +11,9 @@ export default {
   TOP_TV                 : '/video/tv/hot',
   NEW_TV                 : '/video/tv/new',
 
+  // 搜索
+  VIDEO_SEARCH           : '/video/search',
+
   // 用户
   UPDATE_USER            : '/u',
   USER_INFO              : '/u',
