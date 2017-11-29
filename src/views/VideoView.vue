@@ -21,7 +21,7 @@
           <img class="video-poster" :src="douban !== 'none' ? douban.images.medium : video.image">
           <div class="video-des-wrapper">
               <h2>评分：<span class="label score">{{ douban !== 'none' ? douban.rating.average : '暂无评分' }}</span></h2>
-              <h2>地区：<span class="label">{{ video.area }}</span></h2>
+              <h2>地区：<span class="label">{{ video.area || '不详' }}</span></h2>
               <h2 v-show="douban !== 'none'">类型：<span v-for="(genre, idx) in douban.genres" :key="idx" class="label">{{ genre }} </span></h2>
               <h2>年份：<span class="label">{{ douban !== 'none' ? douban.year : video.time }}</span></h2>
               <h2>导演：
@@ -41,7 +41,7 @@
           简介
         </h2>
         <div v-show="openDetails">
-          <p class="details-container">{{ video.other || '暂无简介' | cancelSpace}}</p>
+          <p class="details-container">{{ video.other | cancelSpace}}</p>
         </div>
       </div>
       <div class="video-view-details">
