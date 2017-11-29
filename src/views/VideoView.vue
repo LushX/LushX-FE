@@ -9,7 +9,7 @@
         <h1>
           <a>{{ video.title }}</a>
         </h1><br>
-        <span class="label">{{ douban ? douban.original_title : '' }}</span><br>
+        <span class="label">{{ douban !== 'none' ? douban.original_title : video.title }}</span><br>
         <span @click="collect" class="label collect">
           <i class="fa fa-star" aria-hidden="true" :style="collected ? 'color:#EFC14E' : 'color:#828282'"></i>
           {{ collected ? '已收藏' : '收藏'}}
@@ -18,19 +18,19 @@
       <info :show="showInfo" :msg="infoMsg" :type="infoType"></info>
       <div class="video-view-details">
         <div class="video-poster-wrapper">
-          <img class="video-poster" :src="douban ? douban.images.medium : video.image">
+          <img class="video-poster" :src="douban !== 'none' ? douban.images.medium : video.image">
           <div class="video-des-wrapper">
-              <h2>评分：<span class="label score">{{ douban ? douban.rating.average : '暂无评分' }}</span></h2>
+              <h2>评分：<span class="label score">{{ douban !== 'none' ? douban.rating.average : '暂无评分' }}</span></h2>
               <h2>地区：<span class="label">{{ video.area }}</span></h2>
-              <h2>类型：<span v-for="(genre, idx) in douban.genres" :key="idx" class="label">{{ genre }} </span></h2>
-              <h2>年份：<span class="label">{{ douban.year }}</span></h2>
+              <h2 v-show="douban !== 'none'">类型：<span v-for="(genre, idx) in douban.genres" :key="idx" class="label">{{ genre }} </span></h2>
+              <h2>年份：<span class="label">{{ douban !== 'none' ? douban.year : video.time }}</span></h2>
               <h2>导演：
-                <span v-if="!douban.directors[0]" class="label">暂无</span>
+                <span v-if="douban === 'none'" class="label">{{ video.director }}</span>
                 <a v-for="(director, idx) in douban.directors" :key="idx" class="label click" :href="director.alt" target="_blank">{{ director.name }} </a>
               </h2>
               <h2>演员：
-                <span v-if="!douban.casts[0]" class="label">暂无</span>
-                <a v-for="(cast, idx) in douban.casts" :key="idx" class="label click" :href="cast.alt" target="_blank">{{ cast.name }} </a>
+                <span v-if="douban === 'none'" class="label">{{ video.actor | actorLabel }}</span>
+                <a v-else v-for="(cast, idx) in douban.casts" :key="idx" class="label click" :href="cast.alt" target="_blank">{{ cast.name }} </a>
               </h2>
           </div>
         </div>
@@ -62,7 +62,7 @@
           <a class="play-btn">暂无资源</a>
         </div>
       </div>
-      <div class="video-view-details">
+      <div v-show="douban !== 'none'" class="video-view-details">
         <div class="video-copyright">
           <p class="copyright">本页数据来源于<a :href="douban.alt" target="_blank">豆瓣</a></p>
         </div>
@@ -213,6 +213,9 @@ export default {
       this.$store.dispatch('SET_ITEMDATA', { data: this.video })
       this.$store.dispatch('REQ_DOUBAN_DETAILS', { title: this.video.title }).then(() => {
         this.douban = this.$store.state.douban
+        if (!this.douban) {
+          this.douban = 'none'
+        }
       })
     } else {
       this.$store.dispatch('SET_ITEMDATA', { data: {} })
