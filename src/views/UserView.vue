@@ -246,13 +246,13 @@ export default {
     },
 
     goVideoPrev () {
-      if(this.videoEpisodesCount > 0) {
+      if (this.videoEpisodesCount > 0) {
         this.videoEpisodesCount --
       }
     },
 
     goVideoNext () {
-      if(this.videoEpisodesCount < (this.videoCollectionEpisodes.length - 1)) {
+      if (this.videoEpisodesCount < (this.videoCollectionEpisodes.length - 1)) {
         this.videoEpisodesCount ++
       }
     },

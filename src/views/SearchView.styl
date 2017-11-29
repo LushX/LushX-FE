@@ -12,8 +12,22 @@
   background-color #fff
   padding 1em 1em
   margin-top 10px
+  .search-view-item-title
+    font-size 1.2em
+    a
+      font-weight 400
+      color #828182
+      cursor pointer
+    .page-btn
+      float right
+    span
+      padding-left 2em
+      cursor pointer
+      font-size .9em
   .search-view-item
     padding 1.5em 1em
+    p
+      color #757475
     button
       border 0
       background #FFF
@@ -33,8 +47,22 @@
       line-height 2em
       font-size 1.2em
       color: #59BBA5
+  .result-list
+    padding-left 1em
+    li
+      padding-top 1em
+      list-style none
+      cursor pointer
+      i
+        padding-right .4em
+        color #EFC14E
 
 @media (max-width 600px)
   .search-view-header
     h1
       font-size 1.25em
+  .search-view-details
+    .search-view-item-title
+      font-size 1em
+  .result-list
+    padding-left .5em
