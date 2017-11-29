@@ -53,10 +53,13 @@
             <span @click="goNext">下一页</span>
           </span>
         </h2>
-        <div v-show="openEpisodes">
+        <div v-if="openEpisodes && episodes[0]">
           <router-link v-for="(item, idx) in episodes[currentCount]" :key="idx" class="play-btn" :to="`play/${ item.episodeId }`">
             {{ item.indexs === 0 ? `第 ${ idx + 1 } 集` : `第 ${ item.indexs } 集` }}
           </router-link>
+        </div>
+        <div v-else>
+          <a class="play-btn">暂无资源</a>
         </div>
       </div>
       <div class="video-view-details">
