@@ -58,7 +58,7 @@
             {{ item.indexs === 0 ? `第 ${ idx + 1 } 集` : `第 ${ item.indexs } 集` }}
           </router-link>
         </div>
-        <div v-else>
+        <div v-if="openEpisodes && !episodes[0]">
           <a class="play-btn">暂无资源</a>
         </div>
       </div>
