@@ -41,7 +41,7 @@
           简介
         </h2>
         <div v-show="openDetails">
-          <p class="details-container">{{ video.other | cancelSpace}}</p>
+          <p class="details-container">{{ video.other.trim().length > 0 ? video.other : '暂无简介' | cancelSpace}}</p>
         </div>
       </div>
       <div class="video-view-details">
