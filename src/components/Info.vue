@@ -34,6 +34,7 @@
 <script>
 export default {
   name: 'info',
+
   props: {
     show: {
       type: Boolean,

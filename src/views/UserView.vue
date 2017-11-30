@@ -98,6 +98,10 @@ import { chunk } from '../util/filters'
 export default {
   name: 'user-view',
 
+  title () {
+    return '个人中心'
+  },
+
   data () {
     return {
       model: {
@@ -118,10 +122,6 @@ export default {
       articleEpisodesCount: 0,
       videoEpisodesCount: 0
     }
-  },
-
-  title () {
-    return '个人中心'
   },
 
   components: {
@@ -285,6 +285,6 @@ export default {
     } else {
       this.$store.dispatch('SET_USER', { data: null })
     }
-  },
+  }
 }
 </script>

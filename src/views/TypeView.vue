@@ -28,6 +28,10 @@ import storage from 'store'
 export default {
   name: 'type-view',
 
+  title () {
+    return '分类'
+  },
+
   data () {
     return {
       typeList: [
@@ -68,10 +72,6 @@ export default {
       this.$store.dispatch('SWITCH_TYPE', { type })
       this.$router.push({ path: `/${ type }/top/1` })
     }
-  },
-
-  title () {
-    return '分类'
   }
 }
 </script>

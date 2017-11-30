@@ -52,6 +52,10 @@ export default {
     type: String
   },
 
+  title () {
+    return '鉴权'
+  },
+
   data () {
     return {
       model: {
@@ -64,10 +68,6 @@ export default {
       infoMsg: '',
       loading: false
     }
-  },
-
-  title () {
-    return '鉴权'
   },
 
   components: {

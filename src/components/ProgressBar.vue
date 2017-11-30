@@ -1,4 +1,4 @@
-<style scoped>
+<style lang="stylus" scoped>
   @import './ProgressBar.styl'
 </style>
 
@@ -24,6 +24,7 @@ export default {
       failedColor: '#ff0000',
     }
   },
+
   methods: {
     start () {
       this.show = true
@@ -41,32 +42,39 @@ export default {
       }, 100)
       return this
     },
+
     set (num) {
       this.show = true
       this.canSuccess = true
       this.percent = Math.floor(num)
       return this
     },
+
     get () {
       return Math.floor(this.percent)
     },
+
     increase (num) {
       this.percent = this.percent + Math.floor(num)
       return this
     },
+
     decrease (num) {
       this.percent = this.percent - Math.floor(num)
       return this
     },
+
     finish () {
       this.percent = 100
       this.hide()
       return this
     },
+
     pause () {
       clearInterval(this._timer)
       return this
     },
+
     hide () {
       clearInterval(this._timer)
       this._timer = null
@@ -80,6 +88,7 @@ export default {
       }, 500)
       return this
     },
+
     fail () {
       this.canSuccess = false
       return this

@@ -28,10 +28,6 @@ import Item from '../components/Item.vue'
 export default {
   name: 'item-list',
 
-  components: {
-    Item
-  },
-
   props: {
     type: String
   },
@@ -42,6 +38,10 @@ export default {
       displayedPage: Number(this.$route.params.page) || 1,
       displayedItems: this.$store.state.list
     }
+  },
+
+  components: {
+    Item
   },
 
   computed: {
@@ -64,13 +64,6 @@ export default {
     currentSort () {
       return this.$route.fullPath.split('/')[2]
     }
-  },
-
-  beforeMount () {
-    if (this.$root._isMounted) {
-      this.loadItems(this.page)
-    }
-    this.displayedItems = this.$store.state.list
   },
 
   watch: {
@@ -101,6 +94,13 @@ export default {
         this.$bar.finish()
       })
     }
+  },
+
+  beforeMount () {
+    if (this.$root._isMounted) {
+      this.loadItems(this.page)
+    }
+    this.displayedItems = this.$store.state.list
   }
 }
 </script>

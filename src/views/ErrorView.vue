@@ -17,16 +17,16 @@
 export default {
   name: 'error-view',
 
-  computed: {
-    code () {
-      return this.$route.params.code
-    }
-  },
-
   title () {
     return this.code
       ? this.code
       : '出错啦'
+  },
+
+  computed: {
+    code () {
+      return this.$route.params.code
+    }
   }
 }
 </script>

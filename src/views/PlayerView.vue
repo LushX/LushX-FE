@@ -29,6 +29,10 @@ import storage from 'store'
 export default {
   name: 'player-view',
 
+  title () {
+    return this.resource.title
+  },
+
   data () {
     return {
       playerOptions: {
@@ -51,10 +55,6 @@ export default {
     videoUrl () {
       return this.$store.state.videoUrl
     }
-  },
-
-  title () {
-    return this.resource.title
   },
 
   methods: {

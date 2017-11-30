@@ -39,6 +39,10 @@ import storage from 'store'
 export default {
   name: 'article-view',
 
+  title () {
+    return this.article.title || '文章'
+  },
+
   data () {
     return {
       collected: false,
@@ -115,10 +119,6 @@ export default {
         this.showInfo = !this.showInfo
       }, 1500)
     }
-  },
-
-  title () {
-    return this.article.title || '文章'
   },
 
   beforeMount () {

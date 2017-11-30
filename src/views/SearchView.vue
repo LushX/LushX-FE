@@ -54,6 +54,10 @@ import { chunk } from '../util/filters'
 export default {
   name: 'search-view',
 
+  title () {
+    return '搜索'
+  },
+
   data () {
     return {
       loading: false,
@@ -132,10 +136,6 @@ export default {
           })
         })
     }
-  },
-
-  title () {
-    return '搜索'
   }
 }
 </script>

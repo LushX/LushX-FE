@@ -87,6 +87,10 @@ import { chunk } from '../util/filters'
 export default {
   name: 'video-view',
 
+  title () {
+    return this.video.title || '视频详情'
+  },
+
   data () {
     return {
       douban: '',
@@ -188,10 +192,6 @@ export default {
         })
       }
     }
-  },
-
-  title () {
-    return this.video.title || '视频详情'
   },
 
   beforeMount () {
