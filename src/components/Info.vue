@@ -4,10 +4,26 @@
 
 <template>
   <transition name="slide-fade">
-    <div v-if="show" class="info" :class="type === 'error' ? 'info-error' : 'info-success'">
+    <div v-if="show && type === 'error'" class="info info-error">
       <h1>
         <a>
-          <i class="fa" :class="type === 'error' ? 'fa-exclamation' : 'fa-check-square-o'" aria-hidden="true"></i>
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          {{ msg }}
+        </a>
+      </h1>
+    </div>
+    <div v-else-if="show && type === 'success'" class="info info-success">
+      <h1>
+        <a>
+          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+          {{ msg }}
+        </a>
+      </h1>
+    </div>
+    <div v-if="show && type === 'warning'" class="info info-warning">
+      <h1>
+        <a>
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
           {{ msg }}
         </a>
       </h1>

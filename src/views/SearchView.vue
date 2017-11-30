@@ -12,7 +12,7 @@
     <info :show="showInfo" :type="infoType" :msg="infoMsg"></info>
     <div class="search-view-details">
       <div class="search-view-item">
-        <input v-model="keyword" type="text" placeholder="请输入视频名称">
+        <input v-model="keyword" type="text" placeholder="请输入视频名称" @keyup.enter="search">
         <button @click="search" :disabled="loading">
           <i v-show="!loading" class="fa fa-search" aria-hidden="true"></i>
           <spinner :show="loading"></spinner>
@@ -92,6 +92,7 @@ export default {
     search () {
       this.loading = !this.loading
       if (this.keyword) {
+        this.makeInfo('搜索需要花费一些时间', 'warning')
         ajax.get({
           url: url.VIDEO_SEARCH,
           data: {
