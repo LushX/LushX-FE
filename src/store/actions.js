@@ -148,7 +148,14 @@ export default {
         q: title
       }
     }).then(data => {
-      commit('SET_DOUBAN', { data: data.subjects[0] })
+      let e = data.subjects.filter(item => {
+        return item.title === title
+      })
+      if (e[0]) {
+        commit('SET_DOUBAN', { data: e[0] })
+      } else {
+        commit('SET_DOUBAN', { data: data.subjects[0] })
+      }
     })
   },
 

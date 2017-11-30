@@ -54,11 +54,11 @@ export default {
 
   computed: {
     article () {
-      if(this.$store.state.list[0] && this.currentType === 'article') {
+      if (this.$store.state.list[0] && this.currentType === 'article') {
         let e = this.$store.state.list.filter(item => {
           return item.articleId === this.$route.params.id
         })[0]
-        if(!e) {
+        if (!e) {
           return this.$store.state.itemData || {}
         } else {
           return e
@@ -134,7 +134,7 @@ export default {
         : this.collected = false
     })
 
-    if(this.article.articleId) {
+    if (this.article.articleId) {
       storage.remove('itemData')
       this.$store.dispatch('SET_ITEMDATA', { data: this.article })
       this.article.content = this.article.content.replace(/<div\sclass="image-container-fill".*<\/div>/g, '').replace(/data-original-src/g, 'style="width:100%" src')

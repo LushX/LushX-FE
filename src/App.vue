@@ -40,7 +40,7 @@ export default {
 
   methods: {
     userHandle () {
-      if(this.auth) {
+      if (this.auth) {
         this.$router.push({ path: `/user/${ this.$store.state.userId }` })
       } else {
         this.$router.push({ path: '/auth/login' })

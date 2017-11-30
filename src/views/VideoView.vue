@@ -107,7 +107,7 @@ export default {
 
   computed: {
     video () {
-      if(this.$store.state.list[0] && this.currentType !== 'article') {
+      if (this.$store.state.list[0] && this.currentType !== 'article') {
         let e = this.$store.state.list.filter(item => {
           return item.videoId === this.$route.params.id
         })[0]
@@ -136,13 +136,13 @@ export default {
 
   methods: {
     goPrev () {
-      if(this.episodesCount > 0) {
+      if (this.episodesCount > 0) {
         this.episodesCount --
       }
     },
 
     goNext () {
-      if(this.episodesCount < (this.episodes.length - 1)) {
+      if (this.episodesCount < (this.episodes.length - 1)) {
         this.episodesCount ++
       }
     },
@@ -208,7 +208,7 @@ export default {
         : this.collected = false
     })
 
-    if(this.video.videoId) {
+    if (this.video.videoId) {
       storage.remove('itemData')
       this.$store.dispatch('SET_ITEMDATA', { data: this.video })
       this.$store.dispatch('REQ_DOUBAN_DETAILS', { title: this.video.title }).then(() => {

@@ -210,7 +210,7 @@ export default {
     updateUser () {
       this.loading = !this.loading
       this.authorization = this.$store.state.authorization
-      if(this.validate(this.model, this.confirmPassword)) {
+      if (this.validate(this.model, this.confirmPassword)) {
         ajax.post({
           url: url.UPDATE_USER,
           authorization: this.authorization,
@@ -227,7 +227,7 @@ export default {
     },
 
     showDetails (item, type) {
-      if(type === 'article') {
+      if (type === 'article') {
         storage.remove('itemData')
         this.$store.dispatch('SET_ITEMDATA', { data: item }).then(() => {
           this.$router.push({
@@ -235,7 +235,7 @@ export default {
           })
         })
       }
-      if(type === 'video') {
+      if (type === 'video') {
         storage.remove('itemData')
         this.$store.dispatch('SET_ITEMDATA', { data: item }).then(() => {
           this.$router.push({
@@ -258,13 +258,13 @@ export default {
     },
 
     goArticlePrev () {
-      if(this.articleEpisodesCount > 0) {
+      if (this.articleEpisodesCount > 0) {
         this.articleEpisodesCount --
       }
     },
 
     goArticleNext () {
-      if(this.articleEpisodesCount < (this.articleCollectionEpisodes.length - 1)) {
+      if (this.articleEpisodesCount < (this.articleCollectionEpisodes.length - 1)) {
         this.articleEpisodesCount ++
       }
     }
@@ -279,7 +279,7 @@ export default {
   },
 
   beforeMount () {
-    if(this.user.userId) {
+    if (this.user.userId) {
       storage.remove('user')
       this.$store.dispatch('SET_USER', { data: this.user })
     } else {

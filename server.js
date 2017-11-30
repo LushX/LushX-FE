@@ -82,10 +82,10 @@ function render (req, res) {
     console.log(err)
     if (err.url) {
       res.redirect(err.url)
-    } else if(err.code === undefined) {
+    } else if (err.code === undefined) {
       res.redirect('/error')
     } else {
-      res.redirect('/error/' + err.code)      
+      res.redirect('/error/' + err.code)
     }
   }
 

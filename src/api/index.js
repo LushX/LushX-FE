@@ -16,7 +16,7 @@ const setAuthorization = (token) => {
  * @param {Object} obj
  */
 export const post = obj => {
-  if(obj.authorization) {
+  if (obj.authorization) {
     setAuthorization(obj.authorization)
   }
 
@@ -34,7 +34,7 @@ export const post = obj => {
  * @param {Object} obj
  */
 export const get = obj => {
-  if(obj.authorization) {
+  if (obj.authorization) {
     setAuthorization(obj.authorization)
   }
 
