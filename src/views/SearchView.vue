@@ -93,7 +93,7 @@ export default {
       this.loading = !this.loading
       if (this.keyword) {
         this.makeInfo('搜索需要花费一些时间', 'warning')
-        this.showSearchResult = !this.showSearchResult
+        this.showSearchResult = false
         ajax.get({
           url: url.VIDEO_SEARCH,
           data: {
