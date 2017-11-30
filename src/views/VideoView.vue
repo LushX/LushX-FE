@@ -158,13 +158,12 @@ export default {
 
     collect () {
       if (this.collected) {
-        this.collected = !this.collected
         ajax.post({
           url: url.CANCEL_COLLECT_VIDEO + this.video.videoId,
           authorization: this.$store.state.authorization
         }).then(data => {
           if (data.status === 0) {
-            this.makeInfo('取消收藏成功', 'success')
+            this.makeInfo('已取消收藏', 'warning')
             this.collected = !this.collected
           } else if (data.status === 1) {
             this.makeInfo('请先登录', 'error')
