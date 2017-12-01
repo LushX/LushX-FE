@@ -15,7 +15,7 @@ const setAuthorization = (token) => {
  * POST请求
  * @param {Object} obj
  */
-export const post = obj => {
+export function post (obj) {
   if (obj.authorization) {
     setAuthorization(obj.authorization)
   }
@@ -33,7 +33,7 @@ export const post = obj => {
  * GET请求
  * @param {Object} obj
  */
-export const get = obj => {
+export function get (obj) {
   if (obj.authorization) {
     setAuthorization(obj.authorization)
   }
@@ -51,7 +51,7 @@ export const get = obj => {
  * JSONP请求
  * @param {Object} obj
  */
-export const getJsonp = obj => {
+export function getJsonp (obj) {
   return new Promise((resolve,reject) => {
     jsonp(obj.url + '?' + qs.stringify(obj.data), null,  (err, data) => {
       resolve(data)
