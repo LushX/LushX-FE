@@ -6,7 +6,7 @@
   <div class="search-view">
     <div class="search-view-header">
       <h1>
-        <a>搜索</a>
+        <a>视频搜索</a>
       </h1>
     </div>
     <info :show="showInfo" :type="infoType" :msg="infoMsg"></info>
