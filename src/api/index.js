@@ -54,7 +54,7 @@ export function get (obj) {
 export function getJsonp (obj) {
   return new Promise((resolve,reject) => {
     jsonp(obj.url + '?' + qs.stringify(obj.data), null,  (err, data) => {
-      resolve(data)
+      err ? reject(data) : resolve(data)
     })
   })
 }

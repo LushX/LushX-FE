@@ -29,6 +29,8 @@ export default {
 
   props: ['item'],
 
+  serverCacheKey: props => props.item.articleId || props.item.videoId + '::' + props.item.last_updated,
+
   computed: {
     currentType () {
       return this.$store.state.currentType
