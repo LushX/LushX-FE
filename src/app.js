@@ -10,6 +10,32 @@ if (process.browser) {
   const VueVideoPlayer = require('vue-video-player/ssr')
   require('videojs-contrib-hls/dist/videojs-contrib-hls')
   Vue.use(VueVideoPlayer)
+
+
+  function formatComponentName(vm)
+  {
+    if (vm.$root === vm) return 'root';
+
+    var name = vm._isVue ? (vm.$options && vm.$options.name) || (vm.$options && vm.$options._componentTag) : vm.name;
+    return (name ? 'component <' + name + '>' : 'anonymous component') + (vm._isVue && vm.$options && vm.$options.__file ? ' at ' + (vm.$options && vm.$options.__file) : '');
+
+  }
+
+  Vue.config.errorHandler = function(err, vm, info)
+  {
+    var componentName = formatComponentName(vm);
+    var propsData = vm.$options && vm.$options.propsData;
+
+    fundebug.notifyError(err,
+    {
+        metaData:
+        {
+            componentName: componentName,
+            propsData: propsData,
+            info: info
+        }
+     });
+  };
 }
 
 Vue.mixin(titleMixin)
