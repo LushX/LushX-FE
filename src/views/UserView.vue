@@ -6,7 +6,7 @@
   <div class="user-view" v-if="user">
     <div class="user-view-header">
       <h1>
-        <a>欢迎 <span>{{ user.username }}</span></a>
+        <a>欢迎 <span>{{ user.username || 'NULL' }}</span></a>
         <a class="logout" @click="logout">退出登录</a>
       </h1>
     </div>
@@ -120,7 +120,8 @@ export default {
       videoCollection: {},
       articleCollection: {},
       articleEpisodesCount: 0,
-      videoEpisodesCount: 0
+      videoEpisodesCount: 0,
+      user: {}
     }
   },
 
@@ -131,10 +132,6 @@ export default {
   },
 
   computed: {
-    user () {
-      return this.$store.state.user || {}
-    },
-
     currentType () {
       return this.$store.state.currentType
     },
@@ -199,6 +196,7 @@ export default {
     },
 
     saveUser (data) {
+      this.user = data.data.info
       storage.remove('authorization')
       storage.remove('user')
       this.$store.dispatch('SET_AUTHORIZATION', { data: data.data.Authorization })
@@ -275,11 +273,12 @@ export default {
     this.$store.dispatch('REQ_USER_INFO', { authorization: storage.get('authorization') }).then(() => {
       this.videoCollection = this.$store.state.user.collection.video
       this.articleCollection = this.$store.state.user.collection.article
+      this.user = this.$store.state.user
     })
   },
 
   beforeMount () {
-    if (this.user.userId) {
+    if (typeof this.user !== 'undefined') {
       storage.remove('user')
       this.$store.dispatch('SET_USER', { data: this.user })
     } else {
