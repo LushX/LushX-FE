@@ -19,7 +19,9 @@ export function cancelSpace (text) {
  * @param {String} url
  */
 export function imgUrl (url) {
-  if (url.split('//')[1].split('..').length > 1) {
+  if (url.split('//').length > 2) {
+    return `http://${ url.split('//')[2] }`
+  } else if (url.split('//')[1].split('..').length > 1) {
     return `http://${ url.split('//')[1].split('..').join('.') }`
   } else {
     return `http://${ url.split('//')[1] }`
