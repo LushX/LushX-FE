@@ -15,7 +15,19 @@ export function cancelSpace (text) {
 }
 
 /**
- * Lodash slice函数
+ * 拼接图片 url
+ * @param {String} url
+ */
+export function imgUrl (url) {
+  if (url.split('//')[1].split('..').length > 1) {
+    return `http://${ url.split('//')[1].split('..').join('.') }`
+  } else {
+    return `http://${ url.split('//')[1] }`
+  }
+}
+
+/**
+ * Lodash slice 函数
  * @param {Array} array
  * @param {Number} start
  * @param {Number} end
@@ -47,7 +59,7 @@ export function slice (array, start, end) {
 }
 
 /**
- * Lodash chunk函数
+ * Lodash chunk 函数
  * @param {Array} array
  * @param {Number} size
  */

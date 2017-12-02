@@ -7,14 +7,6 @@ import titleMixin from './util/title'
 import * as filters from './util/filters'
 
 if (process.browser) {
-  const VueLazyload = require('vue-lazyload')
-  Vue.use(VueLazyload, {
-    preLoad: 1.3,
-    error: '../public/error.png',
-    loading: '../public/loading.gif',
-    attempt: 1
-  })
-
   const VueVideoPlayer = require('vue-video-player/ssr')
   require('videojs-contrib-hls/dist/videojs-contrib-hls')
   Vue.use(VueVideoPlayer)
