@@ -21,7 +21,7 @@ export default {
   LOGIN                  : '/login',
 
   // 播放
-  VIDEO_PLAY             : '/api/video',
+  VIDEO_PLAY             : '/api/video/parse',
 
   // 豆瓣
   DOUBAN_API             : 'https://api.douban.com/v2/movie/search',
