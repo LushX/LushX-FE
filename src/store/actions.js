@@ -131,9 +131,10 @@ export default {
     return ajax.get({
       url: url.VIDEO_PLAY,
       data: {
-        url: data
+        value: data
       }
     }).then(data => {
+      console.log(data)
       commit('SET_VIDEO_URL', { data: data.data })
     })
   },

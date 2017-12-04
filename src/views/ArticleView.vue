@@ -7,6 +7,7 @@
     <template v-if="article">
       <div class="article-view-header">
         <h1>
+          <i class="fa fa-arrow-circle-o-left" aria-hidden="true" @click="goBack"></i>
           <a>{{ article.title }}</a>
         </h1><br>
         <span class="label">
@@ -118,6 +119,10 @@ export default {
       setTimeout(() => {
         this.showInfo = !this.showInfo
       }, 1500)
+    },
+
+    goBack () {
+      this.$router.go(-1)
     }
   },
 

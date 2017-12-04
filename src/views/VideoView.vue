@@ -7,6 +7,7 @@
     <template v-if="douban">
       <div class="video-view-header">
         <h1>
+          <i class="fa fa-arrow-circle-o-left" aria-hidden="true" @click="goBack"></i>
           <a>{{ video.title }}</a>
         </h1><br>
         <span class="label">{{ douban !== 'none' ? douban.original_title : video.title }}</span><br>
@@ -149,6 +150,10 @@ export default {
       if (this.episodesCount < (this.episodes.length - 1)) {
         this.episodesCount ++
       }
+    },
+
+    goBack () {
+      this.$router.go(-1)
     },
 
     makeInfo (msg, type) {
